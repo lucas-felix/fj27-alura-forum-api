@@ -23,4 +23,12 @@ public class Course {
 	public Subcategory getSubcategory() {
 		return subcategory;
 	}
+
+	public String getSubcategoryName() {
+		return this.subcategory.getName();
+	}
+
+	public String getCategoryName() {
+		return this.subcategory.getCategoryName();
+	}
 }

@@ -24,4 +24,8 @@ public class Subcategory {
 		return category;
 	}
 
+	public String getCategoryName() {
+		return this.category.getName();
+	}
+
 }
