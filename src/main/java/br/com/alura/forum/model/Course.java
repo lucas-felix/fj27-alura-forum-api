@@ -2,7 +2,7 @@ package br.com.alura.forum.model;
 
 public class Course {
 
-	private String nome;
+	private String name;
 	private Subcategory subcategory;
 	
 	/**
@@ -10,14 +10,14 @@ public class Course {
 	 */
 	public Course() {}
 
-	public Course(String nome, Subcategory subcategory) {
+	public Course(String name, Subcategory subcategory) {
 		super();
-		this.nome = nome;
+		this.name = name;
 		this.subcategory = subcategory;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
 	public Subcategory getSubcategory() {

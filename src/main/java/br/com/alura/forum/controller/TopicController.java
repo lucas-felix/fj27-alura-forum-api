@@ -22,7 +22,7 @@ public class TopicController {
 	@RequestMapping("/api/topics")
 	public List<Topic> listTopics() {
 	
-		Course course = new Course("Java parte 1", new Subcategory("Java", new Category("Programação")));
+		Course course = new Course("Java e JSF", new Subcategory("Java", new Category("Programação")));
 		Topic topic = new Topic("Problemas com o JSF", new User("Fulano"), course);
 		
 		return Arrays.asList(topic, topic, topic);
