@@ -8,7 +8,7 @@ import java.util.List;
 public class Topic {
 
 	private String shortDescription;
-	private Instant lastUpdate;
+	private Instant lastUpdate = Instant.now();
 	
 	private User owner;
 	private Course course;
@@ -25,7 +25,6 @@ public class Topic {
 	public Topic(String shortDescription, User owner, Course course) {
 		super();
 		this.shortDescription = shortDescription;
-		this.lastUpdate = Instant.now();
 		this.owner = owner;
 		this.course = course;
 	}

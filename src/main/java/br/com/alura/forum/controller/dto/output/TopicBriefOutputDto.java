@@ -23,8 +23,8 @@ public class TopicBriefOutputDto {
 		this.secondsSinceLastUpdate = getSecondsSince(topic.getLastUpdate());
 		this.ownerName = topic.getOwner().getName();
 		this.courseName = topic.getCourse().getName();
-		this.subcategoryName = topic.getCourse().getSubcategoryName();
-		this.categoryName = topic.getCourse().getCategoryName();
+		this.subcategoryName = topic.getCourse().getSubcategory().getName();
+		this.categoryName = topic.getCourse().getSubcategory().getCategory().get().getName();
 		this.numberOfResponses = topic.getAnswers().size();
 	}
 
@@ -61,7 +61,7 @@ public class TopicBriefOutputDto {
 		return numberOfResponses;
 	}
 
-	public static List<TopicBriefOutputDto> listFromThe(List<Topic> topics) {
+	public static List<TopicBriefOutputDto> listFromTopics(List<Topic> topics) {
 		return topics.stream()
 				.map(TopicBriefOutputDto::new)
 				.collect(Collectors.toList());
