@@ -24,7 +24,7 @@ public class TopicBriefOutputDto {
 		this.ownerName = topic.getOwner().getName();
 		this.courseName = topic.getCourse().getName();
 		this.subcategoryName = topic.getCourse().getSubcategory().getName();
-		this.categoryName = topic.getCourse().getSubcategory().getCategory().get().getName();
+		this.categoryName = topic.getCourse().getCategoryName();
 		this.numberOfResponses = topic.getAnswers().size();
 	}
 
