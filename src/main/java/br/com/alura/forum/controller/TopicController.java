@@ -22,7 +22,7 @@ public class TopicController {
 	@GetMapping(value = "/api/topics", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<TopicBriefOutputDto> listTopics() {
 		
-		List<Topic> topics =  topicRepository.list();
+		List<Topic> topics =  topicRepository.findAll();
 		return TopicBriefOutputDto.listFromTopics(topics);
 	}
 }
