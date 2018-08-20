@@ -2,15 +2,18 @@ package br.com.alura.forum.model;
 
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 public class Topic {
@@ -22,13 +25,14 @@ public class Topic {
 	private String shortDescription;
 	private Instant lastUpdate = Instant.now();
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	private User owner;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Course course;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "topic", orphanRemoval = true)
+	@LazyCollection(LazyCollectionOption.EXTRA)
 	private List<Answer> answers = new ArrayList<>();
 	
 	/**
@@ -60,9 +64,8 @@ public class Topic {
 	public Course getCourse() {
 		return course;
 	}
-
-	public List<Answer> getAnswers() {
-		return Collections.unmodifiableList(answers);
+	
+	public Integer getNumberOfAnswers() {
+		return this.answers.size();
 	}
-
-}
+ }
