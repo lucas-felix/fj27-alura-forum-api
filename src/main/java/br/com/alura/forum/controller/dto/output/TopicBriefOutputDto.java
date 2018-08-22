@@ -25,7 +25,7 @@ public class TopicBriefOutputDto {
 		this.courseName = topic.getCourse().getName();
 		this.subcategoryName = topic.getCourse().getSubcategory().getName();
 		this.categoryName = topic.getCourse().getCategoryName();
-		this.numberOfResponses = topic.getAnswers().size();
+		this.numberOfResponses = topic.getNumberOfAnswers();
 	}
 
 	private long getSecondsSince(Instant lastUpdate) {
