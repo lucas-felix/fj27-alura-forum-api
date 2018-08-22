@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,10 +24,10 @@ public class Topic {
 	private String shortDescription;
 	private Instant lastUpdate = Instant.now();
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	private User owner;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	private Course course;
 	
 	@OneToMany(mappedBy = "topic", orphanRemoval = true)

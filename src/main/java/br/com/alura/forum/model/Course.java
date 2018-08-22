@@ -3,7 +3,6 @@ package br.com.alura.forum.model;
 import java.util.Optional;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +17,7 @@ public class Course {
 	
 	private String name;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	private Category subcategory;
 	
 	/**
