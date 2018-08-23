@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,13 +26,16 @@ public class Topic {
 	private String shortDescription;
 	private Instant lastUpdate = Instant.now();
 	
+	@Enumerated(EnumType.STRING)
+	private TopicStatus status = TopicStatus.NOT_ANSWERED;
+	
 	@ManyToOne
 	private User owner;
 	
 	@ManyToOne
 	private Course course;
 	
-	@OneToMany(mappedBy = "topic", orphanRemoval = true)
+	@OneToMany(mappedBy = "topic")
 	@LazyCollection(LazyCollectionOption.EXTRA)
 	private List<Answer> answers = new ArrayList<>();
 	
@@ -67,4 +72,9 @@ public class Topic {
 	public Integer getNumberOfAnswers() {
 		return this.answers.size();
 	}
- }
+	
+	public TopicStatus getStatus() {
+		return status;
+	}
+	
+}

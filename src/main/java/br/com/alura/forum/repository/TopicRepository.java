@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
 import br.com.alura.forum.model.Topic;
+import br.com.alura.forum.model.TopicStatus;
 
 public interface TopicRepository extends Repository<Topic, Long> {
 
@@ -13,5 +14,7 @@ public interface TopicRepository extends Repository<Topic, Long> {
 	List<Topic> list();
 	
 	List<Topic> findAll();
+
+	List<Topic> findByStatus(TopicStatus status);
  
 }
