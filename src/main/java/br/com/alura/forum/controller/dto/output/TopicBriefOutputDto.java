@@ -10,6 +10,7 @@ import br.com.alura.forum.model.Topic;
 
 public class TopicBriefOutputDto {
 
+	private int id;
 	private String shortDescription;
 	private long secondsSinceLastUpdate;
 	private String ownerName;
@@ -19,6 +20,7 @@ public class TopicBriefOutputDto {
 	private int numberOfResponses;
 	
 	public TopicBriefOutputDto(Topic topic) {
+		this.id = topic.getId().intValue();
 		this.shortDescription = topic.getShortDescription();
 		this.secondsSinceLastUpdate = getSecondsSince(topic.getLastUpdate());
 		this.ownerName = topic.getOwner().getName();
@@ -31,6 +33,10 @@ public class TopicBriefOutputDto {
 	private long getSecondsSince(Instant lastUpdate) {
 		return Duration.between(lastUpdate, Instant.now())
 				.get(ChronoUnit.SECONDS);
+	}
+	
+	public int getId() {
+		return id;
 	}
 
 	public String getShortDescription() {

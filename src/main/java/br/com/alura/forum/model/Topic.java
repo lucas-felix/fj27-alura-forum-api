@@ -40,7 +40,7 @@ public class Topic {
 	private List<Answer> answers = new ArrayList<>();
 	
 	/**
-	 * @deprecated
+	 * @Deprecated
 	 */
 	public Topic() {
 		
@@ -51,6 +51,10 @@ public class Topic {
 		this.shortDescription = shortDescription;
 		this.owner = owner;
 		this.course = course;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public String getShortDescription() {
@@ -76,5 +80,6 @@ public class Topic {
 	public TopicStatus getStatus() {
 		return status;
 	}
+
 	
 }
