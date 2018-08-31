@@ -29,7 +29,7 @@ public class TopicSearchInputDto {
     }
 
     public Specification<Topic> build() {
-        return (Specification<Topic>) (root, criteriaQuery, criteriaBuilder) -> {
+        return (root, criteriaQuery, criteriaBuilder) -> {
 
             ArrayList<Predicate> predicates = new ArrayList<>();
 

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.alura.forum.model.Topic;
+import org.springframework.data.domain.Page;
 
 public class TopicBriefOutputDto {
 
@@ -71,5 +72,9 @@ public class TopicBriefOutputDto {
 		return topics.stream()
 				.map(TopicBriefOutputDto::new)
 				.collect(Collectors.toList());
-	} 
+	}
+
+    public static Page<TopicBriefOutputDto> listFromTopics(Page<Topic> topicPage) {
+        return topicPage.map(TopicBriefOutputDto::new);
+    }
 }
