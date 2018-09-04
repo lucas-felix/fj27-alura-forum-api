@@ -11,7 +11,7 @@ import org.springframework.data.domain.Page;
 
 public class TopicBriefOutputDto {
 
-	private int id;
+	private Integer id;
 	private String shortDescription;
 	private long secondsSinceLastUpdate;
 	private String ownerName;
@@ -36,7 +36,7 @@ public class TopicBriefOutputDto {
 				.get(ChronoUnit.SECONDS);
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
