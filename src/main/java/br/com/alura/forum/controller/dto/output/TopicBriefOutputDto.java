@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.alura.forum.model.Topic;
+import org.springframework.data.domain.Page;
 
 public class TopicBriefOutputDto {
 
+	private Integer id;
 	private String shortDescription;
 	private long secondsSinceLastUpdate;
 	private String ownerName;
@@ -19,6 +21,7 @@ public class TopicBriefOutputDto {
 	private int numberOfResponses;
 	
 	public TopicBriefOutputDto(Topic topic) {
+		this.id = topic.getId().intValue();
 		this.shortDescription = topic.getShortDescription();
 		this.secondsSinceLastUpdate = getSecondsSince(topic.getLastUpdate());
 		this.ownerName = topic.getOwner().getName();
@@ -31,6 +34,10 @@ public class TopicBriefOutputDto {
 	private long getSecondsSince(Instant lastUpdate) {
 		return Duration.between(lastUpdate, Instant.now())
 				.get(ChronoUnit.SECONDS);
+	}
+	
+	public Integer getId() {
+		return id;
 	}
 
 	public String getShortDescription() {
@@ -65,5 +72,9 @@ public class TopicBriefOutputDto {
 		return topics.stream()
 				.map(TopicBriefOutputDto::new)
 				.collect(Collectors.toList());
-	} 
+	}
+
+    public static Page<TopicBriefOutputDto> listFromTopics(Page<Topic> topicPage) {
+        return topicPage.map(TopicBriefOutputDto::new);
+    }
 }
