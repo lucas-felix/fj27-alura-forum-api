@@ -16,8 +16,6 @@ import br.com.alura.forum.controller.dto.output.TopicBriefOutputDto;
 import br.com.alura.forum.model.Topic;
 import br.com.alura.forum.repository.TopicRepository;
 
-
-@CrossOrigin
 @RestController
 public class TopicController {
 

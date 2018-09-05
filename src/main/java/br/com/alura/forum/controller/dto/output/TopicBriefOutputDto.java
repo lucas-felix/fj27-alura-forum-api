@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.alura.forum.model.Topic;
+import br.com.alura.forum.model.TopicStatus;
 import org.springframework.data.domain.Page;
 
 public class TopicBriefOutputDto {
@@ -19,6 +20,7 @@ public class TopicBriefOutputDto {
 	private String subcategoryName;
 	private String categoryName;
 	private int numberOfResponses;
+	private boolean solved;
 	
 	public TopicBriefOutputDto(Topic topic) {
 		this.id = topic.getId().intValue();
@@ -29,6 +31,7 @@ public class TopicBriefOutputDto {
 		this.subcategoryName = topic.getCourse().getSubcategory().getName();
 		this.categoryName = topic.getCourse().getCategoryName();
 		this.numberOfResponses = topic.getNumberOfAnswers();
+		this.solved = TopicStatus.SOLVED.equals(topic.getStatus());
 	}
 
 	private long getSecondsSince(Instant lastUpdate) {
@@ -68,7 +71,9 @@ public class TopicBriefOutputDto {
 		return numberOfResponses;
 	}
 
-	public static List<TopicBriefOutputDto> listFromTopics(List<Topic> topics) {
+    public boolean isSolved() { return solved; }
+
+    public static List<TopicBriefOutputDto> listFromTopics(List<Topic> topics) {
 		return topics.stream()
 				.map(TopicBriefOutputDto::new)
 				.collect(Collectors.toList());
