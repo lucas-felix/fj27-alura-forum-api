@@ -23,12 +23,12 @@ public class TopicController {
 	private TopicRepository topicRepository;
 
     @GetMapping(value = "/api/topics", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<TopicBriefOutputDto> list(TopicSearchInputDto topicSearch,
-            @PageableDefault(sort = "lastUpdate", direction = Sort.Direction.DESC) Pageable pageRequest) {
+    public Page<TopicBriefOutputDto> listTopics(TopicSearchInputDto topicSearch,
+            @PageableDefault(sort = "creationInstant", direction = Sort.Direction.DESC) Pageable pageRequest) {
 
         Specification<Topic> topicSearchSpecification = topicSearch.build();
-        Page<Topic> topicPage = this.topicRepository.findAll(topicSearchSpecification, pageRequest);
+        Page<Topic> topics = this.topicRepository.findAll(topicSearchSpecification, pageRequest);
 
-        return TopicBriefOutputDto.listFromTopics(topicPage);
+        return TopicBriefOutputDto.listFromTopics(topics);
     }
 }

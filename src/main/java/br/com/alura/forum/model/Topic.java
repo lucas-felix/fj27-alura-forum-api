@@ -24,6 +24,7 @@ public class Topic {
 	private Long id;
 	
 	private String shortDescription;
+	private Instant creationInstant = Instant.now();
 	private Instant lastUpdate = Instant.now();
 	
 	@Enumerated(EnumType.STRING)
@@ -81,5 +82,4 @@ public class Topic {
 		return status;
 	}
 
-	
 }

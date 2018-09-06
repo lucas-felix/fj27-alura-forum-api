@@ -101,6 +101,7 @@ DROP TABLE IF EXISTS `topic`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `topic` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `creation_instant` datetime DEFAULT NULL,
   `last_update` datetime DEFAULT NULL,
   `short_description` varchar(255) DEFAULT NULL,
   `course_id` bigint(20) DEFAULT NULL,
@@ -118,47 +119,47 @@ CREATE TABLE `topic` (
 
 LOCK TABLES `topic` WRITE;
 /*!40000 ALTER TABLE `topic` DISABLE KEYS */;
-INSERT INTO `topic` VALUES (1,'2018-07-20 17:23:17','Como mapear uma Servlet',1,1,'NOT_SOLVED');
-INSERT INTO `topic` VALUES (2,'2018-07-21 16:19:41','Duvida sobre Polimorfismo',1,1,'NOT_ANSWERED');
-INSERT INTO `topic` VALUES (3,'2018-07-22 17:05:28','O que faremos neste curso?',2,1,'NOT_ANSWERED');
-INSERT INTO `topic` VALUES (4,'2018-07-23 18:23:31','JSP não funciona',1,1,'NOT_ANSWERED');
-INSERT INTO `topic` VALUES (5,'2018-07-24 18:23:56','Como o Spring injeta as coisa tudo',1,1,'NOT_ANSWERED');
-INSERT INTO `topic` VALUES (6,'2018-07-25 18:24:29','Spring Boot é bom mesmo?',1,1,'NOT_ANSWERED');
-INSERT INTO `topic` VALUES (7,'2018-07-26 18:25:44','Não tenho bom gosto, conseguirei ser um bom designer?',2,1,'NOT_ANSWERED');
-INSERT INTO `topic` VALUES (8,'2018-07-27 18:26:44','Quais as competencias de um bom UXzeiro?',2,1,'NOT_ANSWERED');
-INSERT INTO `topic` VALUES (9,'2018-07-28 18:27:16','Photoshop não está tendo um bom relacionamento comigo!',2,1,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (1,'2018-07-20 17:23:17','2018-07-20 17:23:17','Como mapear uma Servlet',1,1,'NOT_SOLVED');
+INSERT INTO `topic` VALUES (2,'2018-07-21 16:19:41','2018-07-21 16:19:41','Duvida sobre Polimorfismo',1,1,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (3,'2018-07-22 17:05:28','2018-07-22 17:05:28','O que faremos neste curso?',2,1,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (4,'2018-07-23 18:23:31','2018-07-23 18:23:31','JSP não funciona',1,1,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (5,'2018-07-24 18:23:56','2018-07-24 18:23:56','Como o Spring injeta as coisa tudo',1,1,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (6,'2018-07-25 18:24:29','2018-07-25 18:24:29','Spring Boot é bom mesmo?',1,1,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (7,'2018-07-26 18:25:44','2018-07-26 18:25:44','Não tenho bom gosto, conseguirei ser um bom designer?',2,1,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (8,'2018-07-27 18:26:44','2018-07-27 18:26:44','Quais as competencias de um bom UXzeiro?',2,1,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (9,'2018-07-28 18:27:16','2018-07-28 18:27:16','Photoshop não está tendo um bom relacionamento comigo!',2,1,'NOT_ANSWERED');
 
 /* DUVIDAS SEM RESPOSTA DA THAIS */
-INSERT INTO `topic` VALUES (10,'2018-07-29 18:27:16','Por que não fazemos new para criar Strings',1,2,'NOT_ANSWERED');
-INSERT INTO `topic` VALUES (11,'2018-07-30 18:26:19','Por que Magenta não combina com Verde Limão?',2,2,'NOT_ANSWERED');
-INSERT INTO `topic` VALUES (12,'2018-08-01 18:27:16','Grid com comportamento estranho',3,2,'NOT_ANSWERED');
-INSERT INTO `topic` VALUES (13,'2018-08-02 18:27:16','Erro ao rodar emulador Android',4,2,'NOT_ANSWERED');
-INSERT INTO `topic` VALUES (14,'2018-08-03 18:27:16','Problema com subqueries',5,2,'NOT_ANSWERED');
-INSERT INTO `topic` VALUES (15,'2018-08-04 18:27:16','Não entendi muito bem a função do Scrum Master',6,2,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (10,'2018-07-29 18:27:16','2018-07-29 18:27:16','Por que não fazemos new para criar Strings',1,2,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (11,'2018-07-30 18:26:19','2018-07-30 18:26:19','Por que Magenta não combina com Verde Limão?',2,2,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (12,'2018-08-01 18:27:16','2018-08-01 18:27:16','Grid com comportamento estranho',3,2,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (13,'2018-08-02 18:27:16','2018-08-02 18:27:16','Erro ao rodar emulador Android',4,2,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (14,'2018-08-03 18:27:16','2018-08-03 18:27:16','Problema com subqueries',5,2,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (15,'2018-08-04 18:27:16','2018-08-04 18:27:16','Não entendi muito bem a função do Scrum Master',6,2,'NOT_ANSWERED');
 
 /* DUVIDAS NÃO SOLUCIONADAS DA THAIS */
-INSERT INTO `topic` VALUES (16,'2018-08-05 19:27:16','Não entendi o Design Pattern Decorator',1,2,'NOT_SOLVED');
-INSERT INTO `topic` VALUES (17,'2018-08-06 20:26:19','Como trocar fundo de imagem do Photoshop?',2,2,'NOT_SOLVED');
-INSERT INTO `topic` VALUES (18,'2018-08-07 21:27:16','Problemas ao usar os alerts do Bootstrap',3,2,'NOT_SOLVED');
-INSERT INTO `topic` VALUES (19,'2018-08-08 22:27:16','Erro ao rodar o comando react-native start',4,2,'NOT_SOLVED');
-INSERT INTO `topic` VALUES (20,'2018-08-09 23:27:16','Como fazer essa agregação?',5,2,'NOT_SOLVED');
-INSERT INTO `topic` VALUES (21,'2018-08-10 00:27:16','Qual tempo ideal de uma sprint?',6,2,'NOT_SOLVED');
+INSERT INTO `topic` VALUES (16,'2018-08-05 19:27:16','2018-08-05 19:27:16','Não entendi o Design Pattern Decorator',1,2,'NOT_SOLVED');
+INSERT INTO `topic` VALUES (17,'2018-08-06 20:26:19','2018-08-06 20:26:19','Como trocar fundo de imagem do Photoshop?',2,2,'NOT_SOLVED');
+INSERT INTO `topic` VALUES (18,'2018-08-07 21:27:16','2018-08-07 21:27:16','Problemas ao usar os alerts do Bootstrap',3,2,'NOT_SOLVED');
+INSERT INTO `topic` VALUES (19,'2018-08-08 22:27:16','2018-08-08 22:27:16','Erro ao rodar o comando react-native start',4,2,'NOT_SOLVED');
+INSERT INTO `topic` VALUES (20,'2018-08-09 23:27:16','2018-08-09 23:27:16','Como fazer essa agregação?',5,2,'NOT_SOLVED');
+INSERT INTO `topic` VALUES (21,'2018-08-10 00:27:16','2018-08-10 00:27:16','Qual tempo ideal de uma sprint?',6,2,'NOT_SOLVED');
 
 /* DUVIDAS SEM RESPOSTA DO ALBERTO */
-INSERT INTO `topic` VALUES (22,'2018-08-11 18:27:16','Quando usar classes abstratas?',1,3,'NOT_ANSWERED');
-INSERT INTO `topic` VALUES (23,'2018-08-12 18:26:19','Dica de paleta de cores para aplicação de restaurante!',2,3,'NOT_ANSWERED');
-INSERT INTO `topic` VALUES (24,'2018-08-13 18:27:16','Problemas ao implementar carrousel!',3,3,'NOT_ANSWERED');
-INSERT INTO `topic` VALUES (25,'2018-08-14 18:27:16','Como estilizar componentes <Text> internos',4,3,'NOT_ANSWERED');
-INSERT INTO `topic` VALUES (26,'2018-08-15 18:27:16','Erro ao executar statement',5,3,'NOT_ANSWERED');
-INSERT INTO `topic` VALUES (27,'2018-08-16 18:27:16','Como melhorar a eficiencia das minhas reuniões diárias?',6,3,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (22,'2018-08-11 18:27:16','2018-08-11 18:27:16','Quando usar classes abstratas?',1,3,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (23,'2018-08-12 18:26:19','2018-08-12 18:26:19','Dica de paleta de cores para aplicação de restaurante!',2,3,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (24,'2018-08-13 18:27:16','2018-08-13 18:27:16','Problemas ao implementar carrousel!',3,3,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (25,'2018-08-14 18:27:16','2018-08-14 18:27:16','Como estilizar componentes <Text> internos',4,3,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (26,'2018-08-15 18:27:16','2018-08-15 18:27:16','Erro ao executar statement',5,3,'NOT_ANSWERED');
+INSERT INTO `topic` VALUES (27,'2018-08-16 18:27:16','2018-08-16 18:27:16','Como melhorar a eficiencia das minhas reuniões diárias?',6,3,'NOT_ANSWERED');
 
 /* DUVIDAS NÃO SOLUCIONADAS DO ALBERTO */
-INSERT INTO `topic` VALUES (28,'2018-08-17 19:27:16','Como ler arquivo csv com java.io?',1,3,'NOT_SOLVED');
-INSERT INTO `topic` VALUES (29,'2018-08-18 20:26:19','Ferramentas para auxiliar testes de usabilidade?',2,3,'NOT_SOLVED');
-INSERT INTO `topic` VALUES (30,'2018-08-19 21:27:16','Como posso personalizar o bootstrap?',3,3,'NOT_SOLVED');
-INSERT INTO `topic` VALUES (31,'2018-08-20 22:27:16','Problemas ao executar react-native run-ios',4,3,'NOT_SOLVED');
-INSERT INTO `topic` VALUES (32,'2018-08-21 23:27:16','Problema ao executar procedure!',5,3,'NOT_SOLVED');
-INSERT INTO `topic` VALUES (33,'2018-08-22 00:27:16','Qual melhor dinâmica para a minha retro?',6,3,'NOT_SOLVED');
+INSERT INTO `topic` VALUES (28,'2018-08-17 19:27:16','2018-08-17 19:27:16','Como ler arquivo csv com java.io?',1,3,'NOT_SOLVED');
+INSERT INTO `topic` VALUES (29,'2018-08-18 20:26:19','2018-08-18 20:26:19','Ferramentas para auxiliar testes de usabilidade?',2,3,'NOT_SOLVED');
+INSERT INTO `topic` VALUES (30,'2018-08-19 21:27:16','2018-08-19 21:27:16','Como posso personalizar o bootstrap?',3,3,'NOT_SOLVED');
+INSERT INTO `topic` VALUES (31,'2018-08-20 22:27:16','2018-08-20 22:27:16','Problemas ao executar react-native run-ios',4,3,'NOT_SOLVED');
+INSERT INTO `topic` VALUES (32,'2018-08-21 23:27:16','2018-08-21 23:27:16','Problema ao executar procedure!',5,3,'NOT_SOLVED');
+INSERT INTO `topic` VALUES (33,'2018-08-22 00:27:16','2018-08-22 00:27:16','Qual melhor dinâmica para a minha retro?',6,3,'NOT_SOLVED');
 /*!40000 ALTER TABLE `topic` ENABLE KEYS */;
 UNLOCK TABLES;
 
