@@ -61,6 +61,10 @@ public class Topic {
 	public String getShortDescription() {
 		return shortDescription;
 	}
+	
+	public Instant getCreationInstant() {
+		return creationInstant;
+	}
 
 	public Instant getLastUpdate() {
 		return lastUpdate;
