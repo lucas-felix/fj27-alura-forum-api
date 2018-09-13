@@ -25,7 +25,7 @@ public class SwaggerConfiguration {
         return new Docket(DocumentationType.SWAGGER_2)
         		.select()
         		.apis(RequestHandlerSelectors.basePackage("br.com.alura.forum"))
-        		.paths(PathSelectors.ant("/api/*"))
+        		.paths(PathSelectors.ant("/api/**"))
         		.build()
         		.apiInfo(apiInfo())
         		.globalResponseMessage(RequestMethod.GET, 
