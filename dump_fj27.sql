@@ -183,9 +183,9 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Rafael Rollo');
-INSERT INTO `user` VALUES (2,'Thais André');
-INSERT INTO `user` VALUES (3,'Alberto Souza');
+INSERT INTO `user` VALUES (1,'Rafael Rollo', 'rafael.rollo@caelum.com.br', '$2a$10$7YR8zuQ8CIYvLXkw4gJr4OgtQuAbBzFKEv8xaYqjA/Wf7RtrGSkF6');
+INSERT INTO `user` VALUES (2,'Thais André', 'thais.andre@caelum.com.br', '$2a$10$N3ho7x60pv/KyvLlQub2se8ia4b8FIRklXQHkl70R2yvk8///odj.');
+INSERT INTO `user` VALUES (3,'Alberto Souza', 'alberto.souza@caelum.com.br', '$2a$10$WMnse4qHoHF3MNAmL2yxtOb04jtma4aW.RlmDnszCxGEH.WQWXqMe');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
