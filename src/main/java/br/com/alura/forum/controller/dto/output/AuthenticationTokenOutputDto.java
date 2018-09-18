@@ -1,12 +1,13 @@
 package br.com.alura.forum.controller.dto.output;
 
-public class JwtAuthenticationOutputDto {
+public class AuthenticationTokenOutputDto {
 
+	private String tokenType;
 	private String token;
-	private String tokenType = "Bearer";
 
-	public JwtAuthenticationOutputDto(String token) {
+	public AuthenticationTokenOutputDto(String tokenType, String token) {
 		super();
+		this.tokenType = tokenType;
 		this.token = token;
 	}
 
