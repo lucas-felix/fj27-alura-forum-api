@@ -7,14 +7,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alura.forum.controller.dto.input.LoginInputDto;
-import br.com.alura.forum.controller.dto.output.JwtAuthenticationOutputDto;
+import br.com.alura.forum.controller.dto.output.AuthenticationTokenOutputDto;
 import br.com.alura.forum.security.jwt.TokenManager;
 
 @RestController
@@ -29,17 +28,15 @@ public class UserAuthenticationController {
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<JwtAuthenticationOutputDto> authenticate(@RequestBody LoginInputDto loginInfo) {
+	public ResponseEntity<AuthenticationTokenOutputDto> authenticate(@RequestBody LoginInputDto loginInfo) {
 	
 		UsernamePasswordAuthenticationToken authenticationToken = loginInfo.build();
 
 		try {
-			Authentication authentication = authManager.authenticate(authenticationToken); 	
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-			
+			Authentication authentication = authManager.authenticate(authenticationToken); 			
 			String jwt = tokenManager.generateToken(authentication);
 			
-			JwtAuthenticationOutputDto tokenResponse = new JwtAuthenticationOutputDto(jwt);
+			AuthenticationTokenOutputDto tokenResponse = new AuthenticationTokenOutputDto("Bearer", jwt);
 			return ResponseEntity.ok(tokenResponse);
 		
 		} catch (AuthenticationException e) {
