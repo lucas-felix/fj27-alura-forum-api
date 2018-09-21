@@ -1,14 +1,13 @@
 package br.com.alura.forum.service;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.alura.forum.model.Category;
 import br.com.alura.forum.repository.CategoryRepository;
+import br.com.alura.forum.vo.CategoriesAndTheirStatisticsData;
 import br.com.alura.forum.vo.CategoryStatisticsData;
 
 @Service
@@ -25,16 +24,16 @@ public class DashboardDataProcessingService {
 		this.categoryStatisticsService = categoryStatisticsService;
 	}
 	
-	public Map<Category, CategoryStatisticsData> execute() {
-		Map<Category, CategoryStatisticsData> categoriesAndTheirNumbers = new LinkedHashMap<>();
+	public CategoriesAndTheirStatisticsData execute() {
+		List<Category> principalCategories = this.categoryRepository.findByCategoryIsNull();
 		
-		List<Category> categories = this.categoryRepository.findByCategoryIsNull();
-		
-		categories.stream().forEach(category -> {
+		CategoriesAndTheirStatisticsData categoriesAndTheirData = new CategoriesAndTheirStatisticsData();
+
+		principalCategories.stream().forEach(category -> {
 			CategoryStatisticsData statisticsData = this.categoryStatisticsService.load(category);
-			categoriesAndTheirNumbers.put(category, statisticsData);	
+			categoriesAndTheirData.add(category, statisticsData);
 		});
 				
-		return categoriesAndTheirNumbers;
+		return categoriesAndTheirData;
 	}
 }

@@ -1,10 +1,10 @@
 package br.com.alura.forum.controller.dto.output;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import br.com.alura.forum.model.Category;
+import br.com.alura.forum.vo.CategoriesAndTheirStatisticsData;
 import br.com.alura.forum.vo.CategoryStatisticsData;
 
 public class TopicDashboardItemOutputDto {
@@ -43,12 +43,10 @@ public class TopicDashboardItemOutputDto {
 		return unansweredTopics;
 	}
 
-	public static List<TopicDashboardItemOutputDto> listFromCategories(Map<Category, 
-			CategoryStatisticsData> categoriesAndNumbers) {
-		
-		return categoriesAndNumbers.keySet().stream()
-				.map(category -> new TopicDashboardItemOutputDto(category, categoriesAndNumbers.get(category)))
-				.collect(Collectors.toList());
+	public static List<TopicDashboardItemOutputDto> listFromCategories(CategoriesAndTheirStatisticsData categoriesStatisticsData) {
+			
+		return categoriesStatisticsData
+				.map((category, statData) -> new TopicDashboardItemOutputDto(category, statData));
 	}
 
 }
