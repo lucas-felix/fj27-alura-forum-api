@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -24,6 +25,10 @@ public class Topic {
 	private Long id;
 	
 	private String shortDescription;
+	
+	@Lob
+	private String content;
+	
 	private Instant creationInstant = Instant.now();
 	private Instant lastUpdate = Instant.now();
 	
@@ -41,15 +46,14 @@ public class Topic {
 	private List<Answer> answers = new ArrayList<>();
 	
 	/**
-	 * @Deprecated
+	 * @deprecated
 	 */
-	public Topic() {
-		
-	}
-
-	public Topic(String shortDescription, User owner, Course course) {
+	public Topic() {}
+	
+	public Topic(String shortDescription, String content, User owner, Course course) {
 		super();
 		this.shortDescription = shortDescription;
+		this.content = content;
 		this.owner = owner;
 		this.course = course;
 	}
@@ -60,6 +64,10 @@ public class Topic {
 
 	public String getShortDescription() {
 		return shortDescription;
+	}
+	
+	public String getContent() {
+		return content;
 	}
 	
 	public Instant getCreationInstant() {

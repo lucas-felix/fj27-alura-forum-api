@@ -18,6 +18,7 @@ public interface TopicRepository extends Repository<Topic, Long>, JpaSpecificati
 
 	List<Topic> findAll();
 	
+	Topic save(Topic topic);
 	
 	@Query("SELECT count(topic) FROM Topic topic "
 			+ "JOIN topic.course course "
