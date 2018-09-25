@@ -1,22 +1,17 @@
-package br.com.alura.forum.controller.dto.output;
+package br.com.alura.forum.validator.dto;
 
-public class FieldErrorOutputDto {
+public class FieldErrorOutputDto extends ErrorOutputDto {
 
     private String field;
-    private String message;
 
     FieldErrorOutputDto() { }
 
     public FieldErrorOutputDto(String field, String message) {
+        super(message);
         this.field = field;
-        this.message = message;
     }
 
     public String getField() {
         return field;
-    }
-
-    public String getMessage() {
-        return message;
     }
 }

@@ -1,11 +1,13 @@
 package br.com.alura.forum.handler;
 
-import br.com.alura.forum.controller.dto.output.ValidationErrorsOutputDto;
+import br.com.alura.forum.validator.dto.FieldErrorOutputDto;
+import br.com.alura.forum.validator.dto.ValidationErrorsOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -22,19 +24,26 @@ public class ValidationErrorHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ValidationErrorsOutputDto handleValidationError(MethodArgumentNotValidException exception) {
-        List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
+        List<ObjectError> allErrors = exception.getBindingResult().getAllErrors();
 
-        ValidationErrorsOutputDto validationErrors = processFieldErrors(fieldErrors);
+        ValidationErrorsOutputDto validationErrors = processErrors(allErrors);
         return validationErrors;
     }
 
-    private ValidationErrorsOutputDto processFieldErrors(List<FieldError> fieldErrors) {
+    private ValidationErrorsOutputDto processErrors(List<ObjectError> errors) {
         ValidationErrorsOutputDto validationErrors = new ValidationErrorsOutputDto();
 
-        fieldErrors.forEach(error -> {
+        for (ObjectError error : errors) {
             String errorMessage = messageSource.getMessage(error, LocaleContextHolder.getLocale());
-            validationErrors.addFieldError(error.getField(), errorMessage);
-        });
+
+            if (error instanceof FieldError) {
+                FieldError fieldError = (FieldError) error;
+                validationErrors.addFieldError(fieldError.getField(), errorMessage);
+
+            } else {
+                validationErrors.addError(errorMessage);
+            }
+        }
 
         return validationErrors;
     }

@@ -3,6 +3,7 @@ package br.com.alura.forum.repository;
 import java.time.Instant;
 import java.util.List;
 
+import br.com.alura.forum.model.User;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
@@ -43,4 +44,6 @@ public interface TopicRepository extends Repository<Topic, Long>, JpaSpecificati
 			+ "JOIN subcategory.category category "
 			+ "WHERE category = :category AND topic.status = 'NOT_ANSWERED'")
 	int countUnansweredTopicsByCategory(@Param("category") Category category);
+
+	List<Topic> findByOwnerAndCreationInstantAfterOrderByCreationInstantAsc(User owner, Instant creationTime);
 }

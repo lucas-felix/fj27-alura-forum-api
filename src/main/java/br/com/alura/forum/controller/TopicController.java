@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import br.com.alura.forum.controller.dto.output.TopicOutputDto;
+import br.com.alura.forum.validator.NewTopicCustomValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -61,7 +63,7 @@ public class TopicController {
     }
     
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createTopic(@RequestBody @Valid NewTopicInputDto newTopicDto,
+    public ResponseEntity<TopicOutputDto> createTopic(@RequestBody @Valid NewTopicInputDto newTopicDto,
 		    @AuthenticationPrincipal User loggedUser, UriComponentsBuilder uriBuilder) {
 
         Topic topic = newTopicDto.build(loggedUser, this.courseRepository);
@@ -72,5 +74,10 @@ public class TopicController {
 
         return ResponseEntity.created(path).body(new TopicOutputDto(topic));
 	}
+
+	@InitBinder
+	public void initBinder(WebDataBinder binder, @AuthenticationPrincipal User loggedUser) {
+        binder.addValidators(new NewTopicCustomValidator(this.topicRepository, loggedUser));
+    }
 
 }

@@ -7,6 +7,7 @@ import br.com.alura.forum.model.TopicStatus;
 
 public class TopicOutputDto {
 
+	private Long id;
 	private String shortDescription;
 	private String content;
 	private TopicStatus status;
@@ -20,6 +21,7 @@ public class TopicOutputDto {
 	private String categoryName;
 	
 	public TopicOutputDto(Topic topic) {
+	    this.id = topic.getId();
 		this.shortDescription = topic.getShortDescription();
 		this.content = topic.getContent();
 		this.status = topic.getStatus();
@@ -30,6 +32,10 @@ public class TopicOutputDto {
 		this.courseName = topic.getCourse().getName();
 		this.subcategoryName = topic.getCourse().getSubcategory().getName();
 		this.categoryName = topic.getCourse().getCategoryName();
+	}
+
+	public Long getId() {
+	    return id;
 	}
 
 	public String getShortDescription() {
