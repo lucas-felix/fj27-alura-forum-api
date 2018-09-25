@@ -1,5 +1,6 @@
 package br.com.alura.forum.controller.dto.input;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,10 +13,12 @@ import org.hibernate.validator.constraints.Length;
 
 public class NewTopicInputDto {
 
-	@NotEmpty
+	@NotBlank
+    @Size(min = 10)
 	private String shortDescription;
 	
-	@Length(min = 15)
+	@NotBlank
+    @Size(min = 10)
 	private String content;
 	
 	@NotNull
