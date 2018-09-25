@@ -1,4 +1,4 @@
-package br.com.alura.forum.controller;
+package br.com.alura.forum.controller.dto.output;
 
 import java.time.Instant;
 
@@ -10,7 +10,7 @@ public class TopicOutputDto {
 	private String shortDescription;
 	private String content;
 	private TopicStatus status;
-	private 	int numberOfResponses;
+	private int numberOfResponses;
 	private Instant creationInstant;
 	private Instant lastUpdate;
 	
