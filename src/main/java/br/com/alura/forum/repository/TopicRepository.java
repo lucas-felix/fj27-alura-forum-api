@@ -25,16 +25,16 @@ public interface TopicRepository extends Repository<Topic, Long>, JpaSpecificati
 			+ "JOIN topic.course course "
 			+ "JOIN course.subcategory subcategory "
 			+ "JOIN subcategory.category category "
-			+ "WHERE category = :category")
-	int countTopicsByCategory(@Param("category") Category category);
+			+ "WHERE category.id = :categoryId")
+	int countTopicsByCategoryId(@Param("categoryId") Long categoryId);
 
 	
 	@Query("SELECT count(topic) FROM Topic topic "
 			+ "JOIN topic.course course "
 			+ "JOIN course.subcategory subcategory "
 			+ "JOIN subcategory.category category "
-			+ "WHERE category = :category AND topic.creationInstant > :lastWeek")
-	int countLastWeekTopicsByCategory(@Param("category") Category category, 
+			+ "WHERE category.id = :categoryId AND topic.creationInstant > :lastWeek")
+	int countLastWeekTopicsByCategoryId(@Param("categoryId") Long categoryId,
 			@Param("lastWeek") Instant lastWeek);
 
 	
@@ -42,8 +42,8 @@ public interface TopicRepository extends Repository<Topic, Long>, JpaSpecificati
 			+ "JOIN topic.course course "
 			+ "JOIN course.subcategory subcategory "
 			+ "JOIN subcategory.category category "
-			+ "WHERE category = :category AND topic.status = 'NOT_ANSWERED'")
-	int countUnansweredTopicsByCategory(@Param("category") Category category);
+			+ "WHERE category.id = :categoryId AND topic.status = 'NOT_ANSWERED'")
+	int countUnansweredTopicsByCategoryId(@Param("categoryId") Long categoryId);
 
 	List<Topic> findByOwnerAndCreationInstantAfterOrderByCreationInstantAsc(User owner, Instant creationTime);
 }

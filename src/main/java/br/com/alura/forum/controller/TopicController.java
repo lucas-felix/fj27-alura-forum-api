@@ -67,7 +67,7 @@ public class TopicController {
 		    @AuthenticationPrincipal User loggedUser, UriComponentsBuilder uriBuilder) {
 
         Topic topic = newTopicDto.build(loggedUser, this.courseRepository);
-        topic = topicRepository.save(topic);
+        this.topicRepository.save(topic);
 
         URI path = uriBuilder.path("/api/topics/{id}")
                 .buildAndExpand(topic.getId()).toUri();
@@ -75,7 +75,7 @@ public class TopicController {
         return ResponseEntity.created(path).body(new TopicOutputDto(topic));
 	}
 
-	@InitBinder
+	@InitBinder("newTopicDto")
 	public void initBinder(WebDataBinder binder, @AuthenticationPrincipal User loggedUser) {
         binder.addValidators(new NewTopicCustomValidator(this.topicRepository, loggedUser));
     }

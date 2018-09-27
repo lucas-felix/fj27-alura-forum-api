@@ -22,12 +22,14 @@ public class CategoryStatisticsDataLoadingService {
 
 	public CategoryStatisticsData load(Category category) {
 		
-		int allTopics = this.topicRepository.countTopicsByCategory(category);
+		int allTopics = this.topicRepository.countTopicsByCategoryId(category.getId());
 		
 		Instant lastWeek = Instant.now().minus(7, ChronoUnit.DAYS);
-		int lastWeekTopics = this.topicRepository.countLastWeekTopicsByCategory(category, lastWeek);
+		int lastWeekTopics = this.topicRepository
+				.countLastWeekTopicsByCategoryId(category.getId(), lastWeek);
 		
-		int unansweredTopics = this.topicRepository.countUnansweredTopicsByCategory(category);
+		int unansweredTopics = this.topicRepository
+				.countUnansweredTopicsByCategoryId(category.getId());
 		
 		return new CategoryStatisticsData(allTopics, lastWeekTopics, unansweredTopics);	
 	}

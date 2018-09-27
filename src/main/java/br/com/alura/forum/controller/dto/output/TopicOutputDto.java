@@ -30,7 +30,7 @@ public class TopicOutputDto {
 		this.lastUpdate = topic.getLastUpdate();
 		this.ownerName = topic.getOwner().getName();
 		this.courseName = topic.getCourse().getName();
-		this.subcategoryName = topic.getCourse().getSubcategory().getName();
+		this.subcategoryName = topic.getCourse().getSubcategoryName();
 		this.categoryName = topic.getCourse().getCategoryName();
 	}
 
