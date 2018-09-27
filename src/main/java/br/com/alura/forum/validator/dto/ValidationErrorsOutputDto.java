@@ -7,22 +7,27 @@ import java.util.List;
 
 public class ValidationErrorsOutputDto {
 
-    private List<ErrorOutputDto> errors = new ArrayList<>();
+    private List<String> globalErrorMessages = new ArrayList<>();
+    private List<FieldErrorOutputDto> fieldErrors = new ArrayList<>();
 
     public void addError(String message) {
-        errors.add(new ErrorOutputDto(message));
+        globalErrorMessages.add(message);
     }
 
     public void addFieldError(String field, String message) {
         FieldErrorOutputDto fieldError = new FieldErrorOutputDto(field, message);
-        errors.add(fieldError);
+        fieldErrors.add(fieldError);
     }
 
-    public List<ErrorOutputDto> getErrors() {
-        return errors;
+    public List<String> getGlobalErrorMessages() {
+        return globalErrorMessages;
+    }
+
+    public List<FieldErrorOutputDto> getErrors() {
+        return fieldErrors;
     }
 
     public int getNumberOfErrors() {
-        return this.errors.size();
+        return this.globalErrorMessages.size() + this.fieldErrors.size();
     }
 }

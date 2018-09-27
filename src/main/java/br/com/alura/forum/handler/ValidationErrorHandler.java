@@ -1,6 +1,5 @@
 package br.com.alura.forum.handler;
 
-import br.com.alura.forum.validator.dto.FieldErrorOutputDto;
 import br.com.alura.forum.validator.dto.ValidationErrorsOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -24,28 +23,23 @@ public class ValidationErrorHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ValidationErrorsOutputDto handleValidationError(MethodArgumentNotValidException exception) {
-        List<ObjectError> allErrors = exception.getBindingResult().getAllErrors();
 
-        ValidationErrorsOutputDto validationErrors = processErrors(allErrors);
-        return validationErrors;
-    }
+        List<ObjectError> globalErrors = exception.getBindingResult().getGlobalErrors();
+        List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
 
-    private ValidationErrorsOutputDto processErrors(List<ObjectError> errors) {
         ValidationErrorsOutputDto validationErrors = new ValidationErrorsOutputDto();
 
-        for (ObjectError error : errors) {
-            String errorMessage = messageSource.getMessage(error, LocaleContextHolder.getLocale());
+        globalErrors.forEach(error -> validationErrors.addError(getErrorMessage(error)));
 
-            if (error instanceof FieldError) {
-                FieldError fieldError = (FieldError) error;
-                validationErrors.addFieldError(fieldError.getField(), errorMessage);
-
-            } else {
-                validationErrors.addError(errorMessage);
-            }
-        }
+        fieldErrors.forEach(error -> {
+            String errorMessage = getErrorMessage(error);
+            validationErrors.addFieldError(error.getField(), errorMessage);
+        });
 
         return validationErrors;
     }
 
+    private String getErrorMessage(ObjectError error) {
+        return messageSource.getMessage(error, LocaleContextHolder.getLocale());
+    }
 }

@@ -1,27 +1,28 @@
 package br.com.alura.forum.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.Duration;
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-public class TopicSpammer {
+public class PossibleSpammer {
 
     private List<Topic> topics;
 
-    public TopicSpammer(List<Topic> topics) {
+    public PossibleSpammer(List<Topic> topics) {
         this.topics = topics;
     }
 
-    public boolean hasExceededLimit() {
+    public boolean hasTopicLimitExceeded() {
         return this.topics.size() >= 4;
     }
 
-    public long minutesToNextTopic() {
-        Instant oneHourAgo = Instant.now().minus(1, ChronoUnit.HOURS);
+    public long minutesToNextTopic(Instant from) {
         Instant instantOfTheOldestTopic = topics.get(0).getCreationInstant();
 
-        return Duration.between(oneHourAgo, instantOfTheOldestTopic)
+        return Duration.between(from, instantOfTheOldestTopic)
                 .getSeconds() / 60;
     }
 }

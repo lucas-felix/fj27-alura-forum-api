@@ -1,14 +1,15 @@
 package br.com.alura.forum.validator;
 
 import br.com.alura.forum.controller.dto.input.NewTopicInputDto;
-import br.com.alura.forum.model.TopicSpammer;
+import br.com.alura.forum.model.PossibleSpammer;
 import br.com.alura.forum.model.Topic;
 import br.com.alura.forum.model.User;
 import br.com.alura.forum.repository.TopicRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -35,11 +36,11 @@ public class NewTopicCustomValidator implements Validator {
         List<Topic> topics = topicRepository
                 .findByOwnerAndCreationInstantAfterOrderByCreationInstantAsc(loggedUser, oneHourAgo);
 
-        TopicSpammer spammer = new TopicSpammer(topics);
+        PossibleSpammer possibleSpammer = new PossibleSpammer(topics);
 
-        if (spammer.hasExceededLimit()) {
+        if (possibleSpammer.hasTopicLimitExceeded()) {
 
-            long minutesToNextTopic = spammer.minutesToNextTopic();
+            long minutesToNextTopic = possibleSpammer.minutesToNextTopic(oneHourAgo);
             errors.reject("newTopicInputDto.limit.exceeded",
                     new Object[] {minutesToNextTopic},
                     "O limite individual de novos tópicos por hora foi excedido");

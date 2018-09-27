@@ -75,7 +75,7 @@ public class TopicController {
         return ResponseEntity.created(path).body(new TopicOutputDto(topic));
 	}
 
-	@InitBinder("newTopicDto")
+	@InitBinder("newTopicInputDto")
 	public void initBinder(WebDataBinder binder, @AuthenticationPrincipal User loggedUser) {
         binder.addValidators(new NewTopicCustomValidator(this.topicRepository, loggedUser));
     }
