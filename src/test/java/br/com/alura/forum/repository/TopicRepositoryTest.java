@@ -30,7 +30,7 @@ public class TopicRepositoryTest {
 	public void shouldReturnAllTopicsOfProgramming() throws Exception {
 	
 		Category category = categoryRepo.findByName("Programação");
-		int openTopics = topicRepo.countTopicsByCategory(category);
+		int openTopics = topicRepo.countTopicsByCategoryId(category.getId());
 		
 		assertThat(openTopics).isGreaterThan(0);
 		assertThat(openTopics).isEqualTo(9);
@@ -42,7 +42,7 @@ public class TopicRepositoryTest {
 		Category category = categoryRepo.findByName("Programação");
 		
 		Instant lastWeek = Instant.now().minus(7, ChronoUnit.DAYS);
-		int lastWeekTopics = this.topicRepo.countLastWeekTopicsByCategory(category, lastWeek);
+		int lastWeekTopics = this.topicRepo.countLastWeekTopicsByCategoryId(category.getId(), lastWeek);
 
 		assertThat(lastWeekTopics).isEqualTo(1);
 	}
@@ -52,7 +52,7 @@ public class TopicRepositoryTest {
 	
 		Category category = categoryRepo.findByName("Programação");
 		
-		int unansweredTopics = this.topicRepo.countUnansweredTopicsByCategory(category);
+		int unansweredTopics = this.topicRepo.countUnansweredTopicsByCategoryId(category.getId());
 
 		assertThat(unansweredTopics).isEqualTo(6);
 	}

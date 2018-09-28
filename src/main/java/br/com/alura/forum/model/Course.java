@@ -39,6 +39,11 @@ public class Course {
 		return subcategory;
 	}
 
+	public String getSubcategoryName() {
+		return subcategory.getName();
+	}
+
+
 	public String getCategoryName() {
 		Optional<Category> possibleCategory = this.subcategory.getCategory();
 		

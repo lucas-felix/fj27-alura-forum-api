@@ -46,17 +46,17 @@ public class SwaggerConfiguration {
         					.code(404)
         					.message("O recurso que você buscou não foi encontrado.")
         					.build()))
-        		
-        		.ignoredParameterTypes(User.class)
-			.globalOperationParameters(
-				Arrays.asList(
-					new ParameterBuilder()
-						.name("Authorization")
-						.description("Header para facilitar o envio do Authorization Bearer Token")
-						.modelRef(new ModelRef("string"))
-						.parameterType("header")
-						.required(false)
-						.build()));                                           
+
+		        .ignoredParameterTypes(User.class)
+				.globalOperationParameters(
+					Arrays.asList(
+						new ParameterBuilder()
+							.name("Authorization")
+							.description("Header para facilitar o envio do Authorization Bearer Token")
+							.modelRef(new ModelRef("string"))
+							.parameterType("header")
+							.required(false)
+							.build()));
     }
 	
 	private ApiInfo apiInfo() {

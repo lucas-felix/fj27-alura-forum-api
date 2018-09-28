@@ -34,7 +34,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		
         if (tokenManager.isValid(jwt)) {
             
-        		Long userId = tokenManager.getUserIdFromToken(jwt);
+        	Long userId = tokenManager.getUserIdFromToken(jwt);
             UserDetails userDetails = usersService.loadUserById(userId);
             
             UsernamePasswordAuthenticationToken authentication = 
@@ -48,9 +48,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	private String getTokenFromRequest(HttpServletRequest request) {
 		String bearerToken = request.getHeader("Authorization");
-		
+
 		if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer "))			
-			return bearerToken.substring(7, bearerToken.length());
+			return bearerToken.substring(7);
 		
 		return null;
 	}
