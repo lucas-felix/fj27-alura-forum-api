@@ -6,5 +6,5 @@ import br.com.alura.forum.model.Course;
 
 public interface CourseRepository extends Repository<Course, Long> {
 
-	Course findById(Long id);
+	Course findByName(String courseName);
 }

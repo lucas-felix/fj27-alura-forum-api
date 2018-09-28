@@ -21,8 +21,8 @@ public class NewTopicInputDto {
     @Size(min = 10)
 	private String content;
 	
-	@NotNull
-	private Long courseId;
+	@NotEmpty
+	private String courseName;
 
 	public void setShortDescription(String shortDescription) {
 		this.shortDescription = shortDescription;
@@ -40,17 +40,17 @@ public class NewTopicInputDto {
 		this.content = content;
 	}
 	
-	public Long getCourseId() {
-		return courseId;
+	public String getCourseName() {
+		return courseName;
 	}
 	
-	public void setCourseId(Long courseId) {
-		this.courseId = courseId;
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
 
 	public Topic build(User owner, CourseRepository courseRepository) {
 		
-		Course course = courseRepository.findById(this.courseId);
+		Course course = courseRepository.findByName(this.courseName);
 		return new Topic(this.shortDescription, this.content, owner, course);
 	}
 
