@@ -31,6 +31,8 @@ public class Answer {
 	}
 
 	public Answer(String content, Topic topic, User owner) {
+		topic.addAnswer(this);
+
 		this.content = content;
 		this.topic = topic;
 		this.owner = owner;

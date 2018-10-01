@@ -98,4 +98,8 @@ public class Topic {
 	public List<Answer> getAnswers() {
 		return Collections.unmodifiableList(this.answers);
 	}
+
+	public void addAnswer(Answer answer) {
+		this.answers.add(answer);
+	}
 }
