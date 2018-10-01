@@ -6,6 +6,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import br.com.alura.forum.controller.dto.output.TopicOutputDto;
+import br.com.alura.forum.model.Answer;
+import br.com.alura.forum.repository.AnswerRepository;
 import br.com.alura.forum.validator.NewTopicCustomValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -80,4 +82,10 @@ public class TopicController {
         binder.addValidators(new NewTopicCustomValidator(this.topicRepository, loggedUser));
     }
 
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public TopicOutputDto getTopicDetails(@PathVariable Long id) {
+
+        Topic foundTopic = this.topicRepository.findById(id);
+        return new TopicOutputDto(foundTopic);
+    }
 }

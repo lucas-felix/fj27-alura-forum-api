@@ -2,6 +2,7 @@ package br.com.alura.forum.model;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -94,4 +95,7 @@ public class Topic {
 		return status;
 	}
 
+	public List<Answer> getAnswers() {
+		return Collections.unmodifiableList(this.answers);
+	}
 }
