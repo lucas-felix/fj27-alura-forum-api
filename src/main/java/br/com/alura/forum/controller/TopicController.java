@@ -6,8 +6,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import br.com.alura.forum.controller.dto.output.TopicOutputDto;
-import br.com.alura.forum.model.Answer;
-import br.com.alura.forum.repository.AnswerRepository;
 import br.com.alura.forum.validator.NewTopicCustomValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

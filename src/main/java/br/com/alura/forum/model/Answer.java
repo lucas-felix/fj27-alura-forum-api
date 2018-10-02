@@ -31,11 +31,11 @@ public class Answer {
 	}
 
 	public Answer(String content, Topic topic, User owner) {
-		topic.addAnswer(this);
-
 		this.content = content;
 		this.topic = topic;
 		this.owner = owner;
+
+		topic.addAnswer(this);
 	}
 
 	public Long getId() {
@@ -61,5 +61,9 @@ public class Answer {
 
 	public String getOwnerName() {
 		return this.owner.getName();
+	}
+
+	public User getOwner() {
+		return owner;
 	}
 }

@@ -37,6 +37,8 @@ public class AnswerController {
             @AuthenticationPrincipal User loggedUser,
             UriComponentsBuilder uriBuilder) {
 
+        System.out.println(loggedUser);
+
         Topic topic = this.topicRepository.findById(topicId);
         Answer answer = newAnswerDto.build(topic, loggedUser);
 

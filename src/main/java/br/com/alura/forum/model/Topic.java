@@ -95,11 +95,28 @@ public class Topic {
 		return status;
 	}
 
+	protected void setStatus(TopicStatus status) {
+		this.status = status;
+	}
+
 	public List<Answer> getAnswers() {
 		return Collections.unmodifiableList(this.answers);
 	}
 
 	public void addAnswer(Answer answer) {
+		if (isNotAnswered() && hasDifferentOwner(answer)) {
+			this.status.makeNotSolved(this);
+		}
+
 		this.answers.add(answer);
 	}
+
+	private boolean isNotAnswered() {
+		return this.status.equals(TopicStatus.NOT_ANSWERED);
+	}
+
+	private boolean hasDifferentOwner(Answer answer) {
+		return ! this.owner.equals(answer.getOwner());
+	}
+
 }
