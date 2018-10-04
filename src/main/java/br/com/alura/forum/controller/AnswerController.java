@@ -7,6 +7,7 @@ import br.com.alura.forum.model.Topic;
 import br.com.alura.forum.model.User;
 import br.com.alura.forum.repository.AnswerRepository;
 import br.com.alura.forum.repository.TopicRepository;
+import br.com.alura.forum.service.MailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,9 @@ public class AnswerController {
     @Autowired
     private AnswerRepository answerRepository;
 
+    @Autowired
+    private MailSenderService mailSenderService;
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AnswerOutputDto> answerTopic(@PathVariable Long topicId,
             @Valid @RequestBody NewAnswerInputDto newAnswerDto,
@@ -43,6 +47,8 @@ public class AnswerController {
         Answer answer = newAnswerDto.build(topic, loggedUser);
 
         this.answerRepository.save(answer);
+
+        this.mailSenderService.sendNewReplyEmail(topic, answer);
 
         URI path = uriBuilder
                 .path("/api/topics/{topicId}/answers/{answer}")
