@@ -35,7 +35,7 @@ public class Topic {
 	
 	@Enumerated(EnumType.STRING)
 	private TopicStatus status = TopicStatus.NOT_ANSWERED;
-	
+
 	@ManyToOne
 	private User owner;
 	
@@ -95,7 +95,7 @@ public class Topic {
 		return status;
 	}
 
-	protected void setStatus(TopicStatus status) {
+	void setStatus(TopicStatus status) {
 		this.status = status;
 	}
 
@@ -103,20 +103,11 @@ public class Topic {
 		return Collections.unmodifiableList(this.answers);
 	}
 
-	public void addAnswer(Answer answer) {
-		if (isNotAnswered() && hasDifferentOwner(answer)) {
-			this.status.makeNotSolved(this);
-		}
-
+	void addAnswer(Answer answer) {
 		this.answers.add(answer);
 	}
 
-	private boolean isNotAnswered() {
-		return this.status.equals(TopicStatus.NOT_ANSWERED);
+	public void registerNewReply(Answer newReply) {
+		this.status.registerNewReply(this, newReply);
 	}
-
-	private boolean hasDifferentOwner(Answer answer) {
-		return ! this.owner.equals(answer.getOwner());
-	}
-
 }

@@ -1,97 +1,80 @@
 package br.com.alura.forum.model;
 
-public enum TopicStatus implements TopicStateTransitions {
+public enum TopicStatus implements TopicState {
 
 	NOT_ANSWERED {
 
 		@Override
-		public void makeNotAnswered(Topic topic) {
-			throw new RuntimeException("Tópico já se encontra não respondido");
+		public void registerNewReply(Topic topic, Answer newReply) {
+			if (! topic.getOwner().equals(newReply.getOwner())) {
+				topic.setStatus(NOT_SOLVED);
+			}
+
+			topic.addAnswer(newReply);
 		}
 
 		@Override
-		public void makeNotSolved(Topic topic) {
-			topic.setStatus(TopicStatus.NOT_SOLVED);
+		public void markAsSolved(Topic topic, Answer solution) {
+			throw new RuntimeException("Ainda não implementamos essa feature!");
 		}
 
 		@Override
-		public void makeSolved(Topic topic) {
-			topic.setStatus(TopicStatus.SOLVED);
-		}
-
-		@Override
-		public void makeClosed(Topic topic) {
-			topic.setStatus(TopicStatus.CLOSED);
+		public void close(Topic topic) {
+			throw new RuntimeException("Ainda não implementamos essa feature!");
 		}
 	},
-	
+
 	NOT_SOLVED {
 
 		@Override
-		public void makeNotAnswered(Topic topic) {
-			throw new RuntimeException("Tópico não pode voltar ao estado " + TopicStatus.NOT_ANSWERED);
+		public void registerNewReply(Topic topic, Answer newReply) {
+			topic.addAnswer(newReply);
 		}
 
 		@Override
-		public void makeNotSolved(Topic topic) {
-			throw new RuntimeException("Tópico já se encontra não solucionado");
+		public void markAsSolved(Topic topic, Answer solution) {
+			throw new RuntimeException("Ainda não implementamos essa feature!");
 		}
 
 		@Override
-		public void makeSolved(Topic topic) {
-			topic.setStatus(TopicStatus.SOLVED);
-		}
-
-		@Override
-		public void makeClosed(Topic topic) {
-			topic.setStatus(TopicStatus.CLOSED);
+		public void close(Topic topic) {
+			throw new RuntimeException("Ainda não implementamos essa feature!");
 		}
 	},
-	
+
 	SOLVED {
 
 		@Override
-		public void makeNotAnswered(Topic topic) {
-			throw new RuntimeException("Tópico não pode voltar ao estado " + TopicStatus.NOT_ANSWERED);
+		public void registerNewReply(Topic topic, Answer newReply) {
+			topic.addAnswer(newReply);
 		}
 
 		@Override
-		public void makeNotSolved(Topic topic) {
-			throw new RuntimeException("Tópico não pode voltar ao estado " + TopicStatus.NOT_SOLVED);
+		public void markAsSolved(Topic topic, Answer solution) {
+			throw new RuntimeException("Ainda não implementamos essa feature!");
 		}
 
 		@Override
-		public void makeSolved(Topic topic) {
-			throw new RuntimeException("Tópico já se encontra solucionado");
+		public void close(Topic topic) {
+			throw new RuntimeException("Ainda não implementamos essa feature!");
 		}
-
-		@Override
-		public void makeClosed(Topic topic) {
-			throw new RuntimeException("Tópicos resolvidos não podem ser fechados");
-		}
-		
 	},
-	
+
 	CLOSED {
 
 		@Override
-		public void makeNotAnswered(Topic topic) {
-			throw new RuntimeException("O tópico se encontra fechado");
+		public void registerNewReply(Topic topic, Answer newReply) {
+			throw new RuntimeException("Tópico fechado! Não é possível adicionar novas respostas");
 		}
 
 		@Override
-		public void makeNotSolved(Topic topic) {
-			throw new RuntimeException("O tópico se encontra fechado");
+		public void markAsSolved(Topic topic, Answer solution) {
+			throw new RuntimeException("Ainda não implementamos essa feature!");
 		}
 
 		@Override
-		public void makeSolved(Topic topic) {
-			throw new RuntimeException("O tópico se encontra fechado");
-		}
-
-		@Override
-		public void makeClosed(Topic topic) {
-			throw new RuntimeException("O tópico se encontra fechado");
+		public void close(Topic topic) {
+			throw new RuntimeException("Ainda não implementamos essa feature!");
 		}
 	};
 }

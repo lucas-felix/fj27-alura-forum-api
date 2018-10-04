@@ -35,7 +35,7 @@ public class Answer {
 		this.topic = topic;
 		this.owner = owner;
 
-		topic.addAnswer(this);
+		topic.registerNewReply(this);
 	}
 
 	public Long getId() {
