@@ -17,15 +17,18 @@ public class EmailSender {
     @Autowired
     private JavaMailSender javaMailSender;
 
+    @Autowired
+    private MailTemplateBuilder mailTemplateBuilder;
+
     public void sendNewReplyEmail(NewReplyMessageInfo messageInfo) {
 
         MimeMessagePreparator messagePreparator = (mimeMessage) -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(messageInfo.getTopicOwnerEmail());
             messageHelper.setSubject("Novo comentário em: " + messageInfo.getTopicShortDescription());
-            messageHelper.setText("Olá " + messageInfo.getTopicOwnerName() + "\n\n" +
-                    "Há uma nova mensagem no fórum! " + messageInfo.getAnswerAuthor() +
-                    " comentou no tópico: " + messageInfo.getTopicShortDescription());
+
+            String messageContent = mailTemplateBuilder.build(messageInfo);
+            messageHelper.setText(messageContent, true);
         };
 
         javaMailSender.send(messagePreparator);

@@ -26,7 +26,9 @@ public class NewReplyMailService {
                 topic.getOwner().getName(),
                 topic.getOwner().getEmail(),
                 topic.getShortDescription(),
-                answer.getOwnerName()
+                answer.getOwnerName(),
+                answer.getCreationTime(),
+                answer.getContent()
         );
 
         try {
