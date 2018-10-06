@@ -83,14 +83,22 @@ public class Topic {
 		return owner;
 	}
 
+	public String getOwnerName() {
+		return owner.getName();
+	}
+
 	public Course getCourse() {
 		return course;
 	}
-	
+
+	public String getOwnerEmail() {
+		return owner.getEmail();
+	}
+
 	public Integer getNumberOfAnswers() {
 		return this.answers.size();
 	}
-	
+
 	public TopicStatus getStatus() {
 		return status;
 	}
@@ -110,4 +118,5 @@ public class Topic {
 	public void registerNewReply(Answer newReply) {
 		this.status.registerNewReply(this, newReply);
 	}
+
 }
