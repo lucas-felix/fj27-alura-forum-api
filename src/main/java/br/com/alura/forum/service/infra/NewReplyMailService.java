@@ -4,6 +4,7 @@ import br.com.alura.forum.infra.MailTemplateBuilder;
 import br.com.alura.forum.model.Answer;
 import br.com.alura.forum.model.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -19,6 +20,9 @@ public class NewReplyMailService {
 
     @Autowired
     private MailTemplateBuilder mailTemplateBuilder;
+
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @Async
     public void send(Answer answer) {
@@ -36,9 +40,10 @@ public class NewReplyMailService {
 
         try {
             mailSender.send(messagePreparator);
+            applicationEventPublisher.publishEvent(answer);
 
         } catch (MailException e) {
-            throw new MailServiceException("Não foi possível enviar email.");
+            throw new MailServiceException("Não foi possível enviar email.", e);
         }
     }
 
