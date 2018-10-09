@@ -92,6 +92,11 @@
 			<version>0.9.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.icegreen</groupId>
+			<artifactId>greenmail</artifactId>
+			<version>1.5.8</version>
+		</dependency>
 
 	</dependencies>
 

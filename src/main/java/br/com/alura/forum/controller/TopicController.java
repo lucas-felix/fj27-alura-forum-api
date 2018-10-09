@@ -24,7 +24,7 @@ import br.com.alura.forum.controller.dto.input.NewTopicInputDto;
 import br.com.alura.forum.controller.dto.input.TopicSearchInputDto;
 import br.com.alura.forum.controller.dto.output.TopicBriefOutputDto;
 import br.com.alura.forum.controller.dto.output.TopicDashboardItemOutputDto;
-import br.com.alura.forum.model.Topic;
+import br.com.alura.forum.model.topic_domain.Topic;
 import br.com.alura.forum.model.User;
 import br.com.alura.forum.repository.CourseRepository;
 import br.com.alura.forum.repository.TopicRepository;
@@ -80,4 +80,10 @@ public class TopicController {
         binder.addValidators(new NewTopicCustomValidator(this.topicRepository, loggedUser));
     }
 
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public TopicOutputDto getTopicDetails(@PathVariable Long id) {
+
+        Topic foundTopic = this.topicRepository.findById(id);
+        return new TopicOutputDto(foundTopic);
+    }
 }

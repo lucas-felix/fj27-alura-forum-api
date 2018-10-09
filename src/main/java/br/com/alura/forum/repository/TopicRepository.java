@@ -9,8 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 
-import br.com.alura.forum.model.Category;
-import br.com.alura.forum.model.Topic;
+import br.com.alura.forum.model.topic_domain.Topic;
 
 public interface TopicRepository extends Repository<Topic, Long>, JpaSpecificationExecutor<Topic> {
 
@@ -20,7 +19,9 @@ public interface TopicRepository extends Repository<Topic, Long>, JpaSpecificati
 	List<Topic> findAll();
 	
 	Topic save(Topic topic);
-	
+
+	Topic findById(Long id);
+
 	@Query("SELECT count(topic) FROM Topic topic "
 			+ "JOIN topic.course course "
 			+ "JOIN course.subcategory subcategory "
