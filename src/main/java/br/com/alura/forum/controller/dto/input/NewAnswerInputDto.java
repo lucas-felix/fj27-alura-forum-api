@@ -1,7 +1,7 @@
 package br.com.alura.forum.controller.dto.input;
 
 import br.com.alura.forum.model.Answer;
-import br.com.alura.forum.model.Topic;
+import br.com.alura.forum.model.topic_domain.Topic;
 import br.com.alura.forum.model.User;
 
 import javax.validation.constraints.NotBlank;

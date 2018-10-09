@@ -1,10 +1,9 @@
 package br.com.alura.forum.service.infra;
 
-import br.com.alura.forum.infra.MailTemplateBuilder;
+import br.com.alura.forum.infra.NewReplyMailFactory;
 import br.com.alura.forum.model.Answer;
-import br.com.alura.forum.model.Topic;
+import br.com.alura.forum.model.topic_domain.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -13,19 +12,16 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
-public class NewReplyMailService {
+public class ForumMailService {
 
     @Autowired
     private JavaMailSender mailSender;
 
     @Autowired
-    private MailTemplateBuilder mailTemplateBuilder;
-
-    @Autowired
-    private ApplicationEventPublisher applicationEventPublisher;
+    private NewReplyMailFactory newReplyMailFactory;
 
     @Async
-    public void send(Answer answer) {
+    public void sendNewReplyMail(Answer answer) {
         Topic answeredTopic = answer.getTopic();
 
         MimeMessagePreparator messagePreparator = (mimeMessage) -> {
@@ -34,30 +30,15 @@ public class NewReplyMailService {
             messageHelper.setTo(answeredTopic.getOwnerEmail());
             messageHelper.setSubject("Novo comentário em: " + answeredTopic.getShortDescription());
 
-            String messageContent = getMessageContent(answer);
+            String messageContent = this.newReplyMailFactory.generateNewReplyMailContent(answer);
             messageHelper.setText(messageContent, true);
         };
 
         try {
             mailSender.send(messagePreparator);
-            applicationEventPublisher.publishEvent(answer);
 
         } catch (MailException e) {
             throw new MailServiceException("Não foi possível enviar email.", e);
         }
     }
-
-    private String getMessageContent(Answer answer) {
-
-        Topic answeredTopic = answer.getTopic();
-
-        return mailTemplateBuilder
-                .recipientName(answeredTopic.getOwnerName())
-                .topic(answeredTopic.getShortDescription())
-                .answerAuthor(answer.getOwnerName())
-                .answerInstant(answer.getCreationTime())
-                .answer(answer.getContent())
-                .build();
-    }
-
 }

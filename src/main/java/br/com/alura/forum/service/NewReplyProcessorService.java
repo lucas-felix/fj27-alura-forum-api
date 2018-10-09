@@ -1,10 +1,10 @@
 package br.com.alura.forum.service;
 
 import br.com.alura.forum.model.Answer;
-import br.com.alura.forum.model.Topic;
+import br.com.alura.forum.model.topic_domain.Topic;
 import br.com.alura.forum.repository.AnswerRepository;
 import br.com.alura.forum.service.infra.MailServiceException;
-import br.com.alura.forum.service.infra.NewReplyMailService;
+import br.com.alura.forum.service.infra.ForumMailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +19,14 @@ public class NewReplyProcessorService {
     private AnswerRepository answerRepository;
 
     @Autowired
-    private NewReplyMailService newReplyMailService;
+    private ForumMailService forumMailService;
 
     public void record(Answer answer) {
 
         this.answerRepository.save(answer);
 
         try {
-            this.newReplyMailService.send(answer);
+            this.forumMailService.sendNewReplyMail(answer);
 
         } catch (MailServiceException e) {
             Topic answeredTopic = answer.getTopic();

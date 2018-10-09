@@ -18,9 +18,9 @@ import java.io.IOException;
 
 @Configuration
 @Profile("dev")
-public class EmailConfiguration {
+public class GreenMailLocalSmtpConfiguration {
 
-    private static final Logger logger = LoggerFactory.getLogger(EmailConfiguration.class);
+    private static final Logger logger = LoggerFactory.getLogger(GreenMailLocalSmtpConfiguration.class);
 
     private GreenMail smtpServer;
 
@@ -44,21 +44,6 @@ public class EmailConfiguration {
         this.smtpServer = new GreenMail(serverSetup);
         this.smtpServer.setUser(username, username, password);
         this.smtpServer.start();
-    }
-
-    @EventListener
-    public void verifyEmail(Answer answer) {
-        MimeMessage receivedMessage = this.smtpServer.getReceivedMessages()[0];
-
-        try {
-
-            logger.info((String) receivedMessage.getContent());
-            logger.info("Email enviado para {} a partir da resposta do(a) {}",
-                    answer.getTopic().getOwnerName(), answer.getOwnerName());
-
-        } catch (IOException | MessagingException e) {
-            throw new RuntimeException("Não foi possível recuperar email");
-        }
     }
 
     @PreDestroy

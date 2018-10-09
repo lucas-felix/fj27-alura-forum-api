@@ -1,4 +1,4 @@
-package br.com.alura.forum.model;
+package br.com.alura.forum.model.topic_domain;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -15,8 +15,12 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import br.com.alura.forum.model.Answer;
+import br.com.alura.forum.model.Course;
+import br.com.alura.forum.model.User;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.util.Assert;
 
 @Entity
 public class Topic {
@@ -116,6 +120,8 @@ public class Topic {
 	}
 
 	public void registerNewReply(Answer newReply) {
+		Assert.notNull(newReply, "Nova resposta não pode ser nula");
+
 		this.status.registerNewReply(this, newReply);
 	}
 

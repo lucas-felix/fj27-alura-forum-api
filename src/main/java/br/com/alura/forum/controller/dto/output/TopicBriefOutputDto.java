@@ -6,8 +6,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.com.alura.forum.model.Topic;
-import br.com.alura.forum.model.TopicStatus;
+import br.com.alura.forum.model.topic_domain.Topic;
+import br.com.alura.forum.model.topic_domain.TopicStatus;
 import org.springframework.data.domain.Page;
 
 public class TopicBriefOutputDto {

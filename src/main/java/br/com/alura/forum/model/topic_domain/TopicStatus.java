@@ -1,4 +1,6 @@
-package br.com.alura.forum.model;
+package br.com.alura.forum.model.topic_domain;
+
+import br.com.alura.forum.model.Answer;
 
 public enum TopicStatus implements TopicState {
 
