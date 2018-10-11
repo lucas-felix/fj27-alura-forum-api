@@ -6,7 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Locale;
 
 @Entity
 public class OpenTopicsByCategory {
@@ -28,6 +31,10 @@ public class OpenTopicsByCategory {
         this.instant = Instant.ofEpochMilli(instant.getTime());
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getCategoryName() {
         return categoryName;
     }
@@ -38,5 +45,12 @@ public class OpenTopicsByCategory {
 
     public Instant getInstant() {
         return instant;
+    }
+
+    public String getFormattedInstant(String language) {
+        return DateTimeFormatter.ofPattern("dd/MM/yyyy - EEEE")
+                .withZone(ZoneId.of("America/Sao_Paulo"))
+                .withLocale(Locale.forLanguageTag(language))
+                .format(this.instant);
     }
 }
