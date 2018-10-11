@@ -12,7 +12,7 @@ public interface OpenTopicsByCategoryRepository
     void saveAll(Iterable<OpenTopicsByCategory> topics);
 
     @Query("select t from OpenTopicsByCategory t " +
-            "where year(t.instant) = year(current_date) " +
-            "and month(t.instant) = month(current_date)")
+            "where year(t.date) = year(current_date) " +
+            "and month(t.date) = month(current_date)")
     List<OpenTopicsByCategory> findAllByCurrentMonth();
 }

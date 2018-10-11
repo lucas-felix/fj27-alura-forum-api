@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -19,7 +19,7 @@ public class OpenTopicsByCategory {
     private Long id;
     private String categoryName;
     private int topicCount;
-    private Instant instant;
+    private LocalDate date;
 
     @Deprecated
     public OpenTopicsByCategory() {
@@ -28,7 +28,8 @@ public class OpenTopicsByCategory {
     public OpenTopicsByCategory(String categoryName, Number topicCount, Date instant) {
         this.categoryName = categoryName;
         this.topicCount = topicCount.intValue();
-        this.instant = Instant.ofEpochMilli(instant.getTime());
+        this.date = instant.toInstant()
+                .atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     public Long getId() {
@@ -43,14 +44,8 @@ public class OpenTopicsByCategory {
         return topicCount;
     }
 
-    public Instant getInstant() {
-        return instant;
+    public LocalDate getInstant() {
+        return date;
     }
 
-    public String getFormattedInstant(String language) {
-        return DateTimeFormatter.ofPattern("dd/MM/yyyy - EEEE")
-                .withZone(ZoneId.of("America/Sao_Paulo"))
-                .withLocale(Locale.forLanguageTag(language))
-                .format(this.instant);
-    }
 }

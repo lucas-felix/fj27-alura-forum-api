@@ -53,7 +53,7 @@
                             <tr th:each="topics : ${openTopics}">
                                 <td th:text="${topics.id}">1</td>
                                 <td th:text="${topics.categoryName}">Programação</td>
-                                <td th:text="${topics.getFormattedInstant('pt')}">11/10/2018</td>
+                                <td th:text="${#temporals.format(topics.instant, 'dd/MM/yyyy - EEEE', 'pt')}">11/10/2018</td>
                                 <td th:text="${topics.topicCount}">21</td>
                             </tr>
                         </tbody>
