@@ -7,4 +7,5 @@ public interface OpenTopicsByCategoryRepository
         extends Repository<OpenTopicsByCategory, Long> {
 
     void saveAll(Iterable<OpenTopicsByCategory> topics);
+
 }
