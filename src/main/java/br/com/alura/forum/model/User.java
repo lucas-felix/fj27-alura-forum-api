@@ -38,9 +38,10 @@ public class User implements UserDetails {
 	 */
 	public User() {	}
 	
-	public User(String name) {
-		super();
+	public User(String name, String email, String password) {
 		this.name = name;
+		this.email = email;
+		this.password = password;
 	}
 	
 	public Long getId() {

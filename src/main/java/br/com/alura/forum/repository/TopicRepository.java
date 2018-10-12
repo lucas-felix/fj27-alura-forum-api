@@ -50,7 +50,7 @@ public interface TopicRepository extends Repository<Topic, Long>, JpaSpecificati
 
 	/**
 	 * Constructor expressions JPQL
-	 * @return
+	 * @return a list of instances of OpenTopicsByCategory
 	 */
 	@Query("select new br.com.alura.forum.model.OpenTopicsByCategory(" +
 			"t.course.subcategory.category.name as categoryName, " +
