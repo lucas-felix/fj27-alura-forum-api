@@ -1,5 +1,6 @@
 package br.com.alura.forum.controller.dto.output;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +8,9 @@ import java.util.List;
 import br.com.alura.forum.model.topic_domain.Topic;
 import br.com.alura.forum.model.topic_domain.TopicStatus;
 
-public class TopicOutputDto {
+public class TopicOutputDto implements Serializable {
+
+	private static final long serialVersionUID = -1956202768353667254L;
 
 	private Long id;
 	private String shortDescription;

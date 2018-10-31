@@ -1,12 +1,15 @@
 package br.com.alura.forum.controller.dto.output;
 
+import java.io.Serializable;
 import java.util.List;
 
 import br.com.alura.forum.model.Category;
 import br.com.alura.forum.vo.CategoriesAndTheirStatisticsData;
 import br.com.alura.forum.vo.CategoryStatisticsData;
 
-public class TopicDashboardItemOutputDto {
+public class TopicDashboardItemOutputDto implements Serializable {
+
+	private static final long serialVersionUID = -4012745661724177183L;
 
 	private String categoryName;
 	private List<String> subcategories;
