@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import br.com.alura.forum.controller.dto.output.TopicOutputDto;
 import br.com.alura.forum.validator.NewTopicCustomValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -53,7 +54,8 @@ public class TopicController {
 
         return TopicBriefOutputDto.listFromTopics(topics);
     }
- 
+
+    @Cacheable("dashboardData")
     @GetMapping(value = "/dashboard", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<TopicDashboardItemOutputDto> getDashboardInfo() {
     
@@ -80,6 +82,7 @@ public class TopicController {
         binder.addValidators(new NewTopicCustomValidator(this.topicRepository, loggedUser));
     }
 
+    @Cacheable(value = "topicDetails", key = "#id")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public TopicOutputDto getTopicDetails(@PathVariable Long id) {
 
