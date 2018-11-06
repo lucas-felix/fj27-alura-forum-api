@@ -14,7 +14,7 @@ public class Role implements GrantedAuthority {
 	private static final long serialVersionUID = -2303116094396109761L;
 	
 	@Id
-	public String authority;
+	private String authority;
 	
 	@Override
 	public String getAuthority() {

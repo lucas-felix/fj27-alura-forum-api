@@ -16,8 +16,8 @@ public enum TopicStatus implements TopicState {
 		}
 
 		@Override
-		public void markAsSolved(Topic topic, Answer solution) {
-			throw new RuntimeException("Ainda não implementamos essa feature!");
+		public void markAsSolved(Topic topic) {
+			topic.setStatus(SOLVED);
 		}
 
 		@Override
@@ -34,8 +34,8 @@ public enum TopicStatus implements TopicState {
 		}
 
 		@Override
-		public void markAsSolved(Topic topic, Answer solution) {
-			throw new RuntimeException("Ainda não implementamos essa feature!");
+		public void markAsSolved(Topic topic) {
+			topic.setStatus(SOLVED);
 		}
 
 		@Override
@@ -52,8 +52,8 @@ public enum TopicStatus implements TopicState {
 		}
 
 		@Override
-		public void markAsSolved(Topic topic, Answer solution) {
-			throw new RuntimeException("Ainda não implementamos essa feature!");
+		public void markAsSolved(Topic topic) {
+			throw new RuntimeException("Essa dúvida já foi solucionada!");
 		}
 
 		@Override
@@ -70,8 +70,8 @@ public enum TopicStatus implements TopicState {
 		}
 
 		@Override
-		public void markAsSolved(Topic topic, Answer solution) {
-			throw new RuntimeException("Ainda não implementamos essa feature!");
+		public void markAsSolved(Topic topic) {
+			throw new RuntimeException("Essa dúvida já está fechada!");
 		}
 
 		@Override

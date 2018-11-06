@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -125,4 +126,9 @@ public class Topic {
 		this.status.registerNewReply(this, newReply);
 	}
 
+	public void markAsSolved(Answer solution) {
+		Assert.notNull(solution, "A resposta de solução não pode ser nula");
+
+		this.status.markAsSolved(this);
+	}
 }
