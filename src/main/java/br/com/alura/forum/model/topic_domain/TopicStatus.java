@@ -22,7 +22,7 @@ public enum TopicStatus implements TopicState {
 
 		@Override
 		public void close(Topic topic) {
-			throw new RuntimeException("Ainda não implementamos essa feature!");
+			topic.setStatus(CLOSED);
 		}
 	},
 
@@ -40,7 +40,7 @@ public enum TopicStatus implements TopicState {
 
 		@Override
 		public void close(Topic topic) {
-			throw new RuntimeException("Ainda não implementamos essa feature!");
+			topic.setStatus(CLOSED);
 		}
 	},
 
@@ -58,7 +58,7 @@ public enum TopicStatus implements TopicState {
 
 		@Override
 		public void close(Topic topic) {
-			throw new RuntimeException("Ainda não implementamos essa feature!");
+			throw new RuntimeException("A dúvida já foi solucionada e deve ser mantida aberta para fins de registro!");
 		}
 	},
 
@@ -76,7 +76,7 @@ public enum TopicStatus implements TopicState {
 
 		@Override
 		public void close(Topic topic) {
-			throw new RuntimeException("Ainda não implementamos essa feature!");
+			throw new RuntimeException("A dúvida já está fechada!");
 		}
 	};
 }

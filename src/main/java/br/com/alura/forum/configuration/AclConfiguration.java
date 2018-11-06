@@ -12,13 +12,12 @@ import org.springframework.security.acls.domain.*;
 import org.springframework.security.acls.jdbc.BasicLookupStrategy;
 import org.springframework.security.acls.jdbc.JdbcMutableAclService;
 import org.springframework.security.acls.jdbc.LookupStrategy;
+import org.springframework.security.acls.model.MutableAclService;
 import org.springframework.security.acls.model.PermissionGrantingStrategy;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.sql.DataSource;
-import java.time.Duration;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
@@ -40,9 +39,13 @@ public class AclConfiguration {
     }
 
     @Bean
-    public JdbcMutableAclService aclService() {
-        return new JdbcMutableAclService(this.dataSource,
+    public MutableAclService aclService() {
+        JdbcMutableAclService aclService = new JdbcMutableAclService(this.dataSource,
                 this.lookupStrategy(), this.aclCache());
+        aclService.setClassIdentityQuery("SELECT @@IDENTITY");
+        aclService.setSidIdentityQuery("SELECT @@IDENTITY");
+
+        return aclService;
     }
 
     @Bean

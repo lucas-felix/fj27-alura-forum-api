@@ -10,9 +10,9 @@ import br.com.alura.forum.repository.TopicRepository;
 import br.com.alura.forum.service.NewReplyProcessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -58,26 +58,20 @@ public class AnswerController {
     @Transactional
     @CacheEvict(value = "topicDetails", key = "#topicId")
     @PostMapping("/{answerId}/solution")
+    @PreAuthorize("hasPermission(#topicId, 'Topic', 'ADMINISTRATION')")
     public ResponseEntity<?> markAsSolution(@PathVariable Long topicId,
             @PathVariable Long answerId, UriComponentsBuilder uriBuilder,
             @AuthenticationPrincipal User loggedUser) {
 
-        Topic topic = this.topicRepository.findById(topicId);
-        if(loggedUser.isOwnerOf(topic) || loggedUser.isAdmin()) {
+        Answer answer = this.answerRepository.findById(answerId);
+        answer.markAsSolution();
 
-            Answer answer = this.answerRepository.findById(answerId);
-            answer.markAsSolution();
+        URI path = uriBuilder
+                .path("/api/topics/{topicId}/solution")
+                .buildAndExpand(topicId)
+                .toUri();
 
-            URI path = uriBuilder
-                    .path("/api/topics/{topicId}/solution")
-                    .buildAndExpand(topicId)
-                    .toUri();
-
-            return ResponseEntity.created(path)
-                    .body(new AnswerOutputDto(answer));
-        }
-
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body("Você não tem direito a acessar este recurso!");
+        return ResponseEntity.created(path)
+                .body(new AnswerOutputDto(answer));
     }
 }
