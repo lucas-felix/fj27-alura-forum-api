@@ -2,7 +2,7 @@ package br.com.alura.forum.validator;
 
 import br.com.alura.forum.controller.dto.input.NewTopicInputDto;
 import br.com.alura.forum.model.PossibleSpammer;
-import br.com.alura.forum.model.topic_domain.Topic;
+import br.com.alura.forum.model.topic.domain.Topic;
 import br.com.alura.forum.model.User;
 import br.com.alura.forum.repository.TopicRepository;
 import org.springframework.validation.Errors;

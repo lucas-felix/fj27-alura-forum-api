@@ -2,7 +2,7 @@ package br.com.alura.forum.repository;
 
 import br.com.alura.forum.model.OpenTopicsByCategory;
 import br.com.alura.forum.model.User;
-import br.com.alura.forum.model.topic_domain.Topic;
+import br.com.alura.forum.model.topic.domain.Topic;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;

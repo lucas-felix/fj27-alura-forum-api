@@ -2,7 +2,7 @@ package br.com.alura.forum.controller;
 
 import br.com.alura.forum.controller.dto.input.NewAnswerInputDto;
 import br.com.alura.forum.model.User;
-import br.com.alura.forum.model.topic_domain.Topic;
+import br.com.alura.forum.model.topic.domain.Topic;
 import br.com.alura.forum.repository.TopicRepository;
 import br.com.alura.forum.repository.UserRepository;
 import br.com.alura.forum.security.jwt.TokenManager;

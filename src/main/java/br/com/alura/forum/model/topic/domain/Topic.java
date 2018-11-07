@@ -1,4 +1,4 @@
-package br.com.alura.forum.model.topic_domain;
+package br.com.alura.forum.model.topic.domain;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -125,4 +125,13 @@ public class Topic {
 		this.status.registerNewReply(this, newReply);
 	}
 
+	public void markAsSolved(Answer solution) {
+		Assert.notNull(solution, "A resposta de solução não pode ser nula");
+
+		this.status.markAsSolved(this);
+	}
+
+	public void close() {
+		this.status.close(this);
+	}
 }

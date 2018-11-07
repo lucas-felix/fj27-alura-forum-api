@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import br.com.alura.forum.model.topic.domain.Topic;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -102,5 +103,15 @@ public class User implements UserDetails {
 	@Override
 	public int hashCode() {
 		return Objects.hash(email);
+	}
+
+    public boolean isOwnerOf(Topic topic) {
+		return this.equals(topic.getOwner());
+    }
+
+	public boolean isAdmin() {
+		return this.authorities.stream()
+				.filter(role -> role.getAuthority().contains("ADMIN"))
+				.findFirst().isPresent();
 	}
 }

@@ -1,6 +1,6 @@
 package br.com.alura.forum.model;
 
-import br.com.alura.forum.model.topic_domain.Topic;
+import br.com.alura.forum.model.topic.domain.Topic;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -55,11 +55,10 @@ public class Answer {
 	public boolean isSolution() {
 		return solution;
 	}
-	
+
 	public Topic getTopic() {
 		return topic;
 	}
-
 
 	public String getOwnerName() {
 		return this.owner.getName();
@@ -67,5 +66,10 @@ public class Answer {
 
 	public User getOwner() {
 		return owner;
+	}
+
+	public void markAsSolution() {
+		this.solution = true;
+		this.topic.markAsSolved(this);
 	}
 }

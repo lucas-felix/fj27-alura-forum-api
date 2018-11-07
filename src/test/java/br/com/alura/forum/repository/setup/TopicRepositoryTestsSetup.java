@@ -2,7 +2,7 @@ package br.com.alura.forum.repository.setup;
 
 import br.com.alura.forum.model.Category;
 import br.com.alura.forum.model.Course;
-import br.com.alura.forum.model.topic_domain.Topic;
+import br.com.alura.forum.model.topic.domain.Topic;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 public class TopicRepositoryTestsSetup {

@@ -2,7 +2,7 @@ package br.com.alura.forum.service.infra;
 
 import br.com.alura.forum.infra.NewReplyMailFactory;
 import br.com.alura.forum.model.Answer;
-import br.com.alura.forum.model.topic_domain.Topic;
+import br.com.alura.forum.model.topic.domain.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;

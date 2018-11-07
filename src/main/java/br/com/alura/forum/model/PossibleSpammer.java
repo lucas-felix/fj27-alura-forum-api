@@ -1,6 +1,6 @@
 package br.com.alura.forum.model;
 
-import br.com.alura.forum.model.topic_domain.Topic;
+import br.com.alura.forum.model.topic.domain.Topic;
 
 import java.time.Duration;
 import java.time.Instant;
