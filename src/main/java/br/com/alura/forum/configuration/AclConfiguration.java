@@ -1,5 +1,7 @@
 package br.com.alura.forum.configuration;
 
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Ehcache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.ehcache.EhCacheFactoryBean;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
@@ -12,6 +14,8 @@ import org.springframework.security.acls.domain.*;
 import org.springframework.security.acls.jdbc.BasicLookupStrategy;
 import org.springframework.security.acls.jdbc.JdbcMutableAclService;
 import org.springframework.security.acls.jdbc.LookupStrategy;
+import org.springframework.security.acls.model.AclCache;
+import org.springframework.security.acls.model.AclService;
 import org.springframework.security.acls.model.MutableAclService;
 import org.springframework.security.acls.model.PermissionGrantingStrategy;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -27,21 +31,21 @@ public class AclConfiguration {
     private DataSource dataSource;
 
     @Bean
-    public MethodSecurityExpressionHandler defaultMethodSecurityExpressionHandler() {
+    public MethodSecurityExpressionHandler defaultMethodSecurityExpressionHandler(AclService aclService) {
         DefaultMethodSecurityExpressionHandler expressionHandler
                 = new DefaultMethodSecurityExpressionHandler();
 
         AclPermissionEvaluator permissionEvaluator
-                = new AclPermissionEvaluator(this.aclService());
+                = new AclPermissionEvaluator(aclService);
 
         expressionHandler.setPermissionEvaluator(permissionEvaluator);
         return expressionHandler;
     }
 
     @Bean
-    public MutableAclService aclService() {
+    public MutableAclService aclService(LookupStrategy lookupStrategy, AclCache aclCache) {
         JdbcMutableAclService aclService = new JdbcMutableAclService(this.dataSource,
-                this.lookupStrategy(), this.aclCache());
+                lookupStrategy, aclCache);
         aclService.setClassIdentityQuery("SELECT @@IDENTITY");
         aclService.setSidIdentityQuery("SELECT @@IDENTITY");
 
@@ -63,18 +67,22 @@ public class AclConfiguration {
     }
 
     @Bean
-    public EhCacheBasedAclCache aclCache() {
-        return new EhCacheBasedAclCache(
-                aclEhCacheFactoryBean().getObject(),
-                permissionGrantingStrategy(),
-                aclAuthorizationStrategy()
-        );
+    public EhCacheBasedAclCache aclCache(EhCacheFactoryBean ehCacheFactoryBean,
+            PermissionGrantingStrategy permissionGrantingStrategy,
+            AclAuthorizationStrategy aclAuthorizationStrategy) {
+
+        Ehcache ehCache = ehCacheFactoryBean.getObject();
+
+        return new EhCacheBasedAclCache(ehCache,
+                permissionGrantingStrategy, aclAuthorizationStrategy);
     }
 
     @Bean
-    public EhCacheFactoryBean aclEhCacheFactoryBean() {
+    public EhCacheFactoryBean aclEhCacheFactoryBean(EhCacheManagerFactoryBean aclCacheManagerFactory) {
+        CacheManager aclCacheManager = aclCacheManagerFactory.getObject();
+
         EhCacheFactoryBean ehCacheFactoryBean = new EhCacheFactoryBean();
-        ehCacheFactoryBean.setCacheManager(aclCacheManager().getObject());
+        ehCacheFactoryBean.setCacheManager(aclCacheManager);
         ehCacheFactoryBean.setCacheName("aclCache");
         return ehCacheFactoryBean;
     }
@@ -85,12 +93,12 @@ public class AclConfiguration {
     }
 
     @Bean
-    public LookupStrategy lookupStrategy() {
-        return new BasicLookupStrategy(
-                dataSource,
-                aclCache(),
-                aclAuthorizationStrategy(),
-                new ConsoleAuditLogger()
-        );
+    public LookupStrategy lookupStrategy(AclCache aclCache,
+            AclAuthorizationStrategy aclAuthorizationStrategy) {
+
+        ConsoleAuditLogger auditLogger = new ConsoleAuditLogger();
+
+        return new BasicLookupStrategy(this.dataSource, aclCache,
+                aclAuthorizationStrategy, auditLogger);
     }
 }
