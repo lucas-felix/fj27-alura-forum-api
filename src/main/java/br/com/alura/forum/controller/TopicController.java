@@ -104,7 +104,7 @@ public class TopicController {
     @Transactional
     @PostMapping(value = "/{id}/close")
     @CacheEvict(value = "topicDetails", key = "#id")
-    @PreAuthorize("hasPermission(#id, 'Topic', 'ADMINISTRATION')")
+    @PreAuthorize("hasPermission(#id, 'br.com.alura.forum.model.topic.domain.Topic', 'ADMINISTRATION')")
     public ResponseEntity<Void> closeTopic(@PathVariable Long id, UriComponentsBuilder uriBuilder) {
 
         Topic topic = this.topicRepository.findById(id);

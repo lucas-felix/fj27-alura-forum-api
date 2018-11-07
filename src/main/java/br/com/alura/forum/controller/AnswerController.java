@@ -58,7 +58,7 @@ public class AnswerController {
     @Transactional
     @CacheEvict(value = "topicDetails", key = "#topicId")
     @PostMapping("/{answerId}/solution")
-    @PreAuthorize("hasPermission(#topicId, 'Topic', 'ADMINISTRATION')")
+    @PreAuthorize("hasPermission(#topicId, 'br.com.alura.forum.model.topic.domain.Topic', 'ADMINISTRATION')")
     public ResponseEntity<?> markAsSolution(@PathVariable Long topicId,
             @PathVariable Long answerId, UriComponentsBuilder uriBuilder,
             @AuthenticationPrincipal User loggedUser) {
