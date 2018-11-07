@@ -5,8 +5,8 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.alura.forum.model.topic_domain.Topic;
-import br.com.alura.forum.model.topic_domain.TopicStatus;
+import br.com.alura.forum.model.topic.domain.Topic;
+import br.com.alura.forum.model.topic.domain.TopicStatus;
 
 public class TopicOutputDto implements Serializable {
 

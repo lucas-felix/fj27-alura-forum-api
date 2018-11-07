@@ -1,6 +1,6 @@
 package br.com.alura.forum.service.infra;
 
-import br.com.alura.forum.model.topic_domain.Topic;
+import br.com.alura.forum.model.topic.domain.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.acls.domain.GrantedAuthoritySid;
 import org.springframework.security.acls.domain.ObjectIdentityImpl;

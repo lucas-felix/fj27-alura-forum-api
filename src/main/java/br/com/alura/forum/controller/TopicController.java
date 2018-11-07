@@ -30,7 +30,7 @@ import br.com.alura.forum.controller.dto.input.NewTopicInputDto;
 import br.com.alura.forum.controller.dto.input.TopicSearchInputDto;
 import br.com.alura.forum.controller.dto.output.TopicBriefOutputDto;
 import br.com.alura.forum.controller.dto.output.TopicDashboardItemOutputDto;
-import br.com.alura.forum.model.topic_domain.Topic;
+import br.com.alura.forum.model.topic.domain.Topic;
 import br.com.alura.forum.model.User;
 import br.com.alura.forum.repository.CourseRepository;
 import br.com.alura.forum.repository.TopicRepository;

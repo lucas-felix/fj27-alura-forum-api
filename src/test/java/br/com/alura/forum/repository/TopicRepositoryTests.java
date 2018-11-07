@@ -1,10 +1,7 @@
 package br.com.alura.forum.repository;
 
-import br.com.alura.forum.model.Category;
-import br.com.alura.forum.model.Course;
 import br.com.alura.forum.model.OpenTopicsByCategory;
-import br.com.alura.forum.model.User;
-import br.com.alura.forum.model.topic_domain.Topic;
+import br.com.alura.forum.model.topic.domain.Topic;
 import br.com.alura.forum.repository.setup.TopicRepositoryTestsSetup;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,11 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.transaction.Transactional;
 
 import java.util.List;
 

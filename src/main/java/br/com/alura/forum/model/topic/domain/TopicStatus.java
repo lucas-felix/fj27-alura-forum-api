@@ -1,4 +1,4 @@
-package br.com.alura.forum.model.topic_domain;
+package br.com.alura.forum.model.topic.domain;
 
 import br.com.alura.forum.model.Answer;
 

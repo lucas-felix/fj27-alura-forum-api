@@ -3,7 +3,7 @@ package br.com.alura.forum.controller;
 import br.com.alura.forum.controller.dto.input.NewAnswerInputDto;
 import br.com.alura.forum.controller.dto.output.AnswerOutputDto;
 import br.com.alura.forum.model.Answer;
-import br.com.alura.forum.model.topic_domain.Topic;
+import br.com.alura.forum.model.topic.domain.Topic;
 import br.com.alura.forum.model.User;
 import br.com.alura.forum.repository.AnswerRepository;
 import br.com.alura.forum.repository.TopicRepository;

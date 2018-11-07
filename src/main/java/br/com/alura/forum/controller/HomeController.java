@@ -14,8 +14,8 @@ public class HomeController {
 
     @RequestMapping("/")
     @ResponseBody
-    public String index(@AuthenticationPrincipal User user) {
+    public String index() {
         System.out.println("Hello World!");
-        return "Hello World com Spring Boot e MVC, " + user.getName();
+        return "Hello World com Spring Boot e MVC";
     }
 }

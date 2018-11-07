@@ -1,7 +1,7 @@
 package br.com.alura.forum.service;
 
 import br.com.alura.forum.model.Answer;
-import br.com.alura.forum.model.topic_domain.Topic;
+import br.com.alura.forum.model.topic.domain.Topic;
 import br.com.alura.forum.repository.AnswerRepository;
 import br.com.alura.forum.service.infra.MailServiceException;
 import br.com.alura.forum.service.infra.ForumMailService;
