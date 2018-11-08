@@ -1,5 +1,6 @@
 package br.com.alura.forum.service.infra;
 
+import br.com.alura.forum.model.Role;
 import br.com.alura.forum.model.topic.domain.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.acls.domain.GrantedAuthoritySid;
@@ -34,7 +35,7 @@ public class TopicAclPermissionsRecorderService {
     }
 
     private void enterPermissionForAdmins(MutableAcl acl, Permission permission) {
-        GrantedAuthoritySid adminsSid = new GrantedAuthoritySid("ROLE_ADMIN");
+        GrantedAuthoritySid adminsSid = new GrantedAuthoritySid(Role.ROLE_ADMIN);
         acl.insertAce(acl.getEntries().size(), permission, adminsSid,  true);
     }
 

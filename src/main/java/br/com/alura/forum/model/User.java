@@ -111,7 +111,7 @@ public class User implements UserDetails {
 
 	public boolean isAdmin() {
 		return this.authorities.stream()
-				.filter(role -> role.getAuthority().contains("ADMIN"))
+				.filter(role -> role.equals(Role.ROLE_ADMIN))
 				.findFirst().isPresent();
 	}
 }
