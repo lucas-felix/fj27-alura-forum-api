@@ -6,11 +6,12 @@ public class Course {
 
 	private String name;
 	private Category subcategory;
-	
+
 	/**
-	 * @deprecated
+	 * @deprecated frameworks eyes only
 	 */
-	public Course() {}
+	@Deprecated
+	Course() {}
 
 	public Course(String name, Category subcategory) {
 		super();

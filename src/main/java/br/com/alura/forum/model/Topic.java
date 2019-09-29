@@ -16,8 +16,9 @@ public class Topic {
 	private List<Answer> answers = new ArrayList<>();
 	
 	/**
-	 * @deprecated
+	 * @deprecated frameworks eyes only
 	 */
+	@Deprecated
 	public Topic() {
 		
 	}

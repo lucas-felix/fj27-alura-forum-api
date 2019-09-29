@@ -8,9 +8,10 @@ public class Category {
 	private Category category;
 	
 	/**
-	 * @deprecated
+	 * @deprecated frameworks eyes only
 	 */
-	public Category() {}
+	@Deprecated
+	Category() {}
 	
 	public Category(String name) {
 		this.name = name;

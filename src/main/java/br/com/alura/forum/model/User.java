@@ -5,8 +5,9 @@ public class User {
 	private String name;
 
 	/**
-	 * @deprecated
+	 * @deprecated frameworks eyes only
 	 */
+	@Deprecated
 	public User() {	}
 	
 	public User(String name) {

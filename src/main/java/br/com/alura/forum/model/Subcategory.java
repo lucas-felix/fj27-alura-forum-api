@@ -6,8 +6,9 @@ public class Subcategory {
 	private Category category;
 
 	/**
-	 * @deprecated
+	 * @deprecated frameworks eyes only
 	 */
+	@Deprecated
 	public Subcategory() {}
 	
 	public Subcategory(String name, Category category) {
